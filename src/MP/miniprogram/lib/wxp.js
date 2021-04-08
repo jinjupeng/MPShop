@@ -54,13 +54,13 @@ wxp.request3 = function(args){
   return wxp.request2(args)
 }
 
-// 整合登陆组件
+// 整合登录组件
 wxp.request4 = function (args) {
   let token = wx.getStorageSync('token')
   if (!token) {
     let pages = getCurrentPages()
     let currentPage = pages[pages.length - 1]
-    // 展示登陆浮窗
+    // 展示登录浮窗
     currentPage.setData({
       showLoginPanel: true
     })

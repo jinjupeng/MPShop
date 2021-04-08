@@ -39,7 +39,7 @@ Component({
       // 本地token与微信服务器上的session要分别对待
       let tokenIsValid = false, sessionIsValid = false
       let res0 = await getApp().wxp.checkSession().catch(err=>{
-        // 清理登陆状态，会触发该错误
+        // 清理登录状态，会触发该错误
         // checkSession:fail 系统错误，错误码：-13001,session time out…d relogin
         console.log("err",err);
         tokenIsValid = false
@@ -90,7 +90,7 @@ Component({
 
       getApp().globalData.token = token
       wx.showToast({
-        title: '登陆成功了',
+        title: '登录成功了',
       })
       this.close()
       this.triggerEvent('loginSuccess')
@@ -135,7 +135,7 @@ Component({
       const onUserLogin = (token) => {
         getApp().globalData.token = token
         wx.showToast({
-          title: '登陆成功了',
+          title: '登录成功了',
         })
         this.close()
         this.triggerEvent('loginSuccess')
@@ -157,7 +157,7 @@ Component({
       wx.checkSession({
         success() {
           //session_key 未过期，并且在本生命周期一直有效
-          console.log('在登陆中');
+          console.log('在登录中');
           let token = wx.getStorageSync('token')
           if (token) {
             onUserLogin(token)
