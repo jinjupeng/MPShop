@@ -110,15 +110,15 @@ namespace ApiServer.BLL.BLL
 
         //https://www.cnblogs.com/banluduxing/p/6383950.html
         //https://blog.csdn.net/cc365/article/details/50639769
-        public string GetSignature(string url)
-        {
-            //WeChat access_token API endpoint
-            var token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appId + "&secret=" + appSecret;
-            //WeChat jsapi_ticket API endpoint
-            var ticket_url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=";
-            Random rdm = new Random();
-            var nonceStr = Math.Round(1).toString(36).substr(2, 15);
+        //public string GetSignature(string url)
+        //{
+        //    //WeChat access_token API endpoint
+        //    var token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appId + "&secret=" + appSecret;
+        //    //WeChat jsapi_ticket API endpoint
+        //    var ticket_url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=";
+        //    Random rdm = new Random();
+        //    var nonceStr = Math.Round(1).toString(36).substr(2, 15);
 
-        }
+        //}
     }
 }

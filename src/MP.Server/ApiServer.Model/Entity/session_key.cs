@@ -7,9 +7,14 @@ using System.Collections.Generic;
 
 namespace ApiServer.Model.Entity
 {
-    public partial class sys_role_api
+    public partial class session_key
     {
-        public long role_id { get; set; }
-        public long api_id { get; set; }
+        public int id { get; set; }
+        public int uid { get; set; }
+        public string sessionKey { get; set; }
+        public DateTime createdAt { get; set; }
+        public DateTime updatedAt { get; set; }
+
+        public virtual mp_user u { get; set; }
     }
 }
