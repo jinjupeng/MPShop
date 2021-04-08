@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ApiServer.Common.Http
 {
@@ -12,13 +13,13 @@ namespace ApiServer.Common.Http
         /// <param name="Url"></param>
         /// <param name="postDataStr"></param>
         /// <returns></returns>
-        public static string HttpGet(string Url, string postDataStr = "")
+        public static async Task<string> HttpGetAsync(string Url, string postDataStr = "")
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url + (postDataStr == "" ? "" : "?") + postDataStr);
             request.Method = "GET";
             request.ContentType = "text/json;charset=UTF-8";
 
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            var response = await request.GetResponseAsync();
             Stream myResponseStream = response.GetResponseStream();
             StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
             string retString = myStreamReader.ReadToEnd();

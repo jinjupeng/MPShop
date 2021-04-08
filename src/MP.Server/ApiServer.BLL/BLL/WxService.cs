@@ -3,15 +3,20 @@ using ApiServer.Common;
 using ApiServer.Common.Cache;
 using ApiServer.Common.Config;
 using ApiServer.Common.Encrypt;
+using ApiServer.Common.Helpers;
 using ApiServer.Common.Http;
 using ApiServer.Model.Entity;
 using ApiServer.Model.Model.MsgModel;
 using ApiServer.Model.Model.ViewModel;
 using ApiServer.Model.Model.WX;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
 
 namespace ApiServer.BLL.BLL
 {
@@ -20,15 +25,18 @@ namespace ApiServer.BLL.BLL
         private readonly ICacheService _cacheService;
         private readonly IBaseService<sys_user> _baseService;
         private readonly IJwtAuthService _jwtAuthService;
+        private readonly ILogger<WxService> _logger;
         private readonly string appId = ConfigTool.Configuration["wxmini:appid"];
         private readonly string appSecret = ConfigTool.Configuration["wxmini:secret"];
+        private readonly string REBACK_URL = "/apis/backend";
 
         public WxService(ICacheService cacheService, IBaseService<sys_user> baseService,
-            IJwtAuthService jwtAuthService)
+            IJwtAuthService jwtAuthService, ILogger<WxService> logger)
         {
             _cacheService = cacheService;
             _baseService = baseService;
             _jwtAuthService = jwtAuthService;
+            _logger = logger;
         }
 
         /// <summary>
@@ -66,11 +74,11 @@ namespace ApiServer.BLL.BLL
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public string GetSessionId(string code)
+        public async Task<string> GetSessionIdAsync(string code)
         {
             string url = $"https://api.weixin.qq.com/sns/jscode2session?appid={appId}&secret={appSecret}&js_code={code}&grant_type=authorization_code";
             // 发送get请求
-            var res = HttpUtil.HttpGet(url);
+            var res = await HttpUtil.HttpGetAsync(url);
             var dict = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
             var uuid = Guid.NewGuid().ToString();
             // 将值dict放入到缓存中
@@ -110,15 +118,92 @@ namespace ApiServer.BLL.BLL
 
         //https://www.cnblogs.com/banluduxing/p/6383950.html
         //https://blog.csdn.net/cc365/article/details/50639769
-        //public string GetSignature(string url)
-        //{
-        //    //WeChat access_token API endpoint
-        //    var token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appId + "&secret=" + appSecret;
-        //    //WeChat jsapi_ticket API endpoint
-        //    var ticket_url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=";
-        //    Random rdm = new Random();
-        //    var nonceStr = Math.Round(1).toString(36).substr(2, 15);
+        /// <summary>
+        /// 获取签名
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public async Task<Dictionary<string, string>> GetSignatureAsync(string url)
+        {
+            //WeChat access_token API endpoint
+            var token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appId + "&secret=" + appSecret;
+            //WeChat jsapi_ticket API endpoint
+            var ticket_url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=";
+            var nonceStr = StringHelper.GetRandomString(16, true, true, true, false, "");
+            var res = await HttpUtil.HttpGetAsync(token_url);
+            if (string.IsNullOrEmpty(res))
+            {
+                _logger.LogError("拉取token发生错误，可能需要检查公众号ip白名单");
+                return null;
+            }
+            var data = JsonConvert.DeserializeObject<Dictionary<string, string>>(res);
+            var access_token = data["access_token"];
+            var res2 = await HttpUtil.HttpGetAsync(ticket_url + access_token);
+            data = JsonConvert.DeserializeObject<Dictionary<string, string>>(res2);
+            var ticket = data["ticket"];
+            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            var timestamp = Convert.ToInt64(ts.TotalSeconds).ToString();
+            var sha1 = CreateShaString(ticket, timestamp, nonceStr, url);
+            var dict = new Dictionary<string, string>
+            {
+                { "appId", appId },
+                { "timestamp", timestamp },
+                { "nonceStr", nonceStr },
+                { "signature", sha1 },
+                { "url", url }
+            };
+            return dict;
+        }
 
-        //}
+        /// <summary>
+        /// 获取openId
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public async Task<Dictionary<string, string>> GetOpenIdAsync(string code)
+        {
+            var url = $"https://api.weixin.qq.com/sns/oauth2/access_token?appid=${appId}&secret=${appSecret}&code=${code}&grant_type=authorization_code";
+            var res = await HttpUtil.HttpGetAsync(url);
+            if (string.IsNullOrEmpty(res))
+            {
+                return null;
+            }
+
+            return JsonConvert.DeserializeObject<Dictionary<string, string>>(res);
+        }
+
+        /// <summary>
+        /// 获取用户的详细信息，需要先取到openid
+        /// </summary>
+        /// <param name="access_token"></param>
+        /// <param name="openid"></param>
+        /// <returns></returns>
+        public async Task<Dictionary<string, string>> GetUserInfoAsync(string access_token, string openid)
+        {
+            var url = $"https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN";
+            var res = await HttpUtil.HttpGetAsync(url);
+            if (string.IsNullOrEmpty(res))
+            {
+                return null;
+            }
+
+            return JsonConvert.DeserializeObject<Dictionary<string, string>>(res);
+        }
+
+        /// <summary>
+        /// 准备发生跳转
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="getUserInfo"></param>
+        public void StartGetUserInfo(HttpRequest ctx, bool getUserInfo = false)
+        {
+            var redirectUrl = HttpUtility.UrlEncode($"{ctx.Host}{REBACK_URL}", System.Text.Encoding.GetEncoding(936));
+            var scope = getUserInfo ? "snsapi_userinfo" : "snsapi_base";
+            var state = getUserInfo ? "userinfo" : "base";
+            var targetUrl = $"https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${redirectUrl}&response_type=code&scope=${scope}&state=${state}#wechat_redirect";
+            ctx.HttpContext.Response.StatusCode = 301;
+            ctx.HttpContext.Response.Redirect(targetUrl);
+        }
+
     }
 }
