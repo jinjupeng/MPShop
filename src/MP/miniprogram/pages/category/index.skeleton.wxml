@@ -1,0 +1,179 @@
+<!--
+此文件为开发者工具生成，生成时间: 2020/8/30 下午1:56:06 
+使用方法：
+1. 在"pages/category/index.wxml"中使用`include`指令引入此模板，
+2. 在"pages/category/index.wxss"中使用`import`指令引入"pages/category/index.skeleton.wxss"
+3. 书写对应的逻辑，来控制骨架屏的显示与隐藏
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<view class="sk-container">
+  <view is="miniprogram_npm/@miniprogram-component-plus/vtabs/index" class="test" id="category-vtabs">
+    <view class="weui-vtabs vtabs-index--weui-vtabs">
+      <view class="weui-vtabs-bar__wrp vtabs-index--weui-vtabs-bar__wrp">
+        <scroll-view scroll-y="true" class="weui-vtabs-bar__scrollview vtabs-index--weui-vtabs-bar__scrollview" scroll-into-view="weui-vtabs-item__0">
+          <view class="weui-vtabs-bar__content vtabs-index--weui-vtabs-bar__content">
+            <view class="weui-vtabs-bar__item vtabs-index--weui-vtabs-bar__item" data-index="0" style="background-color: rgb(255, 255, 255); color: rgb(255, 0, 0); border: none;" id="weui-vtabs-item__0">
+              <view class="weui-vtabs-bar__title vtabs-index--weui-vtabs-bar__title"><text class="sk-transparent sk-text-18-7500-640 sk-text" style="background-size: 100% 1.4rem;">生活方式</text></view>
+            </view>
+            <view class="weui-vtabs-bar__item vtabs-index--weui-vtabs-bar__item" data-index="1" style="background-color: rgb(238, 238, 238); color: rgb(0, 0, 0); border: none;" id="weui-vtabs-item__1">
+              <view class="weui-vtabs-bar__title vtabs-index--weui-vtabs-bar__title"><text class="sk-transparent sk-text-18-7500-828 sk-text" style="background-size: 100% 1.4rem;">文创好物</text></view>
+            </view>
+            <view class="weui-vtabs-bar__item vtabs-index--weui-vtabs-bar__item" data-index="2" style="background-color: rgb(238, 238, 238); color: rgb(0, 0, 0); border: none;" id="weui-vtabs-item__2">
+              <view class="weui-vtabs-bar__title vtabs-index--weui-vtabs-bar__title"><text class="sk-transparent sk-text-18-7500-870 sk-text" style="background-size: 100% 1.4rem;">创意玩具</text></view>
+            </view>
+            <view class="weui-vtabs-bar__item vtabs-index--weui-vtabs-bar__item" data-index="3" style="background-color: rgb(238, 238, 238); color: rgb(0, 0, 0); border: none;" id="weui-vtabs-item__3">
+              <view class="weui-vtabs-bar__title vtabs-index--weui-vtabs-bar__title"><text class="sk-transparent sk-text-18-7500-406 sk-text" style="background-size: 100% 1.4rem;">微瑕特卖</text></view>
+            </view>
+            <view class="weui-vtabs-bar__item vtabs-index--weui-vtabs-bar__item" data-index="4" style="background-color: rgb(238, 238, 238); color: rgb(0, 0, 0); border: none;" id="weui-vtabs-item__4">
+              <view class="weui-vtabs-bar__title vtabs-index--weui-vtabs-bar__title"><text class="sk-transparent sk-text-18-7500-769 sk-text" style="background-size: 100% 1.4rem;">宫廷服饰</text></view>
+            </view>
+            <view class="weui-vtabs-bar__item vtabs-index--weui-vtabs-bar__item" data-index="5" style="background-color: rgb(238, 238, 238); color: rgb(0, 0, 0); border: none;" id="weui-vtabs-item__5">
+              <view class="weui-vtabs-bar__title vtabs-index--weui-vtabs-bar__title"><text class="sk-transparent sk-text-18-7500-750 sk-text" style="background-size: 100% 1.4rem;">甄选珠宝</text></view>
+            </view>
+            <view class="weui-vtabs-bar__item vtabs-index--weui-vtabs-bar__item" data-index="6" style="background-color: rgb(238, 238, 238); color: rgb(0, 0, 0); border: none;" id="weui-vtabs-item__6">
+              <view class="weui-vtabs-bar__title vtabs-index--weui-vtabs-bar__title"><text class="sk-transparent sk-text-18-7500-711 sk-text" style="background-size: 100% 1.4rem;">宫廷美玉</text></view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+      <view class="weui-vtabs-content__wrp vtabs-index--weui-vtabs-content__wrp">
+        <scroll-view scroll-y="true" class="weui-vtabs-content__scrollview vtabs-index--weui-vtabs-content__scrollview" scroll-top="0" scroll-with-animation="true">
+          <view class="weui-vtabs-content vtabs-index--weui-vtabs-content">
+            <view is="miniprogram_npm/@miniprogram-component-plus/vtabs-content/index" id="goods-content0">
+              <view class="weui-vtabs-content__item content-index--weui-vtabs-content__item" id="weui-vtabs-content__0">
+                <view class="vtabs-content-item" style="border: none;">
+                  <view style="line-height: 50px; background-color: rgb(255, 255, 255); text-align: center; background-size: 24.1509% 3.125rem; background-position-x: 50%;" class="sk-transparent sk-text-34-0000-183 sk-text">生活方式</view>
+                  <view>
+                    <view is="miniprogram_npm/@vant/weapp/card/index">
+                      <view class=" van-card card-index--van-card">
+                        <view class="van-card__header card-index--van-card__header">
+                          <view class="van-card__thumb card-index--van-card__thumb">
+                            <image class="van-card__img card-index--van-card__img sk-image" mode="aspectFit"></image>
+                          </view>
+                          <view class="van-card__content card-index--van-card__content van-card__content card-index--van-card__content">
+                            <view>
+                              <view class="van-card__title card-index--van-card__title sk-transparent sk-text-12-5000-76 sk-text" style="background-size: 48.3463% 1rem;">"夏凉被"174</view>
+                            </view>
+                            <view class="van-card__bottom card-index--van-card__bottom">
+                              <view class="van-card__price card-index--van-card__price sk-transparent">¥<text class="van-card__price-integer card-index--van-card__price-integer sk-transparent sk-text-10-0000-25 sk-text" style="background-size: 93.9494% 1.25rem;">325</text><text class="van-card__price-decimal card-index--van-card__price-decimal sk-transparent sk-text-20-0000-98 sk-text"
+                                  style="background-size: 93.9261% 1.25rem;">.32</text></view>
+                            </view>
+                          </view>
+                        </view>
+                        <view class="van-card__footer card-index--van-card__footer">
+                          <view>
+                            <view is="miniprogram_npm/@vant/weapp/icon/index">
+                              <view class="van-icon icon-index--van-icon van-icon-shopping-cart-o icon-index--van-icon-shopping-cart-o sk-pseudo sk-pseudo-circle" style="color: ;font-size: 24px;"></view>
+                            </view>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                  <view>
+                    <view is="miniprogram_npm/@vant/weapp/card/index">
+                      <view class=" van-card card-index--van-card">
+                        <view class="van-card__header card-index--van-card__header">
+                          <view class="van-card__thumb card-index--van-card__thumb">
+                            <image class="van-card__img card-index--van-card__img sk-image" mode="aspectFit"></image>
+                          </view>
+                          <view class="van-card__content card-index--van-card__content van-card__content card-index--van-card__content">
+                            <view>
+                              <view class="van-card__title card-index--van-card__title sk-transparent sk-text-12-5000-35 sk-text" style="background-size: 43.4763% 1rem;">"冬暖被"19</view>
+                            </view>
+                            <view class="van-card__bottom card-index--van-card__bottom">
+                              <view class="van-card__price card-index--van-card__price sk-transparent">¥<text class="van-card__price-integer card-index--van-card__price-integer sk-transparent sk-text-10-0000-320 sk-text" style="background-size: 93.8944% 1.25rem;">29</text><text class="van-card__price-decimal card-index--van-card__price-decimal sk-transparent sk-text-20-0000-699 sk-text"
+                                  style="background-size: 93.9261% 1.25rem;">.75</text></view>
+                            </view>
+                          </view>
+                        </view>
+                        <view class="van-card__footer card-index--van-card__footer">
+                          <view>
+                            <view is="miniprogram_npm/@vant/weapp/icon/index">
+                              <view class="van-icon icon-index--van-icon van-icon-shopping-cart-o icon-index--van-icon-shopping-cart-o sk-pseudo sk-pseudo-circle" style="color: ;font-size: 24px;"></view>
+                            </view>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                  <view>
+                    <view is="miniprogram_npm/@vant/weapp/card/index">
+                      <view class=" van-card card-index--van-card">
+                        <view class="van-card__header card-index--van-card__header">
+                          <view class="van-card__thumb card-index--van-card__thumb">
+                            <image class="van-card__img card-index--van-card__img sk-image" mode="aspectFit"></image>
+                          </view>
+                          <view class="van-card__content card-index--van-card__content van-card__content card-index--van-card__content">
+                            <view>
+                              <view class="van-card__title card-index--van-card__title sk-transparent sk-text-12-5000-214 sk-text" style="background-size: 48.3463% 1rem;">"秋躺椅"621</view>
+                            </view>
+                            <view class="van-card__bottom card-index--van-card__bottom">
+                              <view class="van-card__price card-index--van-card__price sk-transparent">¥<text class="van-card__price-integer card-index--van-card__price-integer sk-transparent sk-text-10-0000-662 sk-text" style="background-size: 93.8944% 1.25rem;">13</text><text class="van-card__price-decimal card-index--van-card__price-decimal sk-transparent sk-text-20-0000-431 sk-text"
+                                  style="background-size: 93.9261% 1.25rem;">.98</text></view>
+                            </view>
+                          </view>
+                        </view>
+                        <view class="van-card__footer card-index--van-card__footer">
+                          <view>
+                            <view is="miniprogram_npm/@vant/weapp/icon/index">
+                              <view class="van-icon icon-index--van-icon van-icon-shopping-cart-o icon-index--van-icon-shopping-cart-o sk-pseudo sk-pseudo-circle" style="color: ;font-size: 24px;"></view>
+                            </view>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                  <view>
+                    <view is="miniprogram_npm/@vant/weapp/card/index">
+                      <view class=" van-card card-index--van-card">
+                        <view class="van-card__header card-index--van-card__header">
+                          <view class="van-card__thumb card-index--van-card__thumb">
+                            <image class="van-card__img card-index--van-card__img sk-image" mode="aspectFit"></image>
+                          </view>
+                          <view class="van-card__content card-index--van-card__content van-card__content card-index--van-card__content">
+                            <view>
+                              <view class="van-card__title card-index--van-card__title sk-transparent sk-text-12-5000-328 sk-text" style="background-size: 48.3463% 1rem;">"夏凉被"503</view>
+                            </view>
+                            <view class="van-card__bottom card-index--van-card__bottom">
+                              <view class="van-card__price card-index--van-card__price sk-transparent">¥<text class="van-card__price-integer card-index--van-card__price-integer sk-transparent sk-text-10-0000-131 sk-text" style="background-size: 93.9494% 1.25rem;">113</text><text class="van-card__price-decimal card-index--van-card__price-decimal sk-transparent sk-text-20-0000-419 sk-text"
+                                  style="background-size: 93.9261% 1.25rem;">.28</text></view>
+                            </view>
+                          </view>
+                        </view>
+                        <view class="van-card__footer card-index--van-card__footer">
+                          <view>
+                            <view is="miniprogram_npm/@vant/weapp/icon/index">
+                              <view class="van-icon icon-index--van-icon van-icon-shopping-cart-o icon-index--van-icon-shopping-cart-o sk-pseudo sk-pseudo-circle" style="color: ;font-size: 24px;"></view>
+                            </view>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                  <view>
+                    <view is="miniprogram_npm/@vant/weapp/card/index">
+                      <view class=" van-card card-index--van-card">
+                        <view class="van-card__header card-index--van-card__header">
+                          <view class="van-card__thumb card-index--van-card__thumb">
+                            <image class="van-card__img card-index--van-card__img sk-image" mode="aspectFit"></image>
+                          </view>
+                          <view class="van-card__content card-index--van-card__content van-card__content card-index--van-card__content">
+                            <view>
+                              <view class="van-card__title card-index--van-card__title sk-transparent sk-text-12-5000-479 sk-text" style="background-size: 48.3463% 1rem;">"秋躺椅"264</view>
+                            </view>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</view>

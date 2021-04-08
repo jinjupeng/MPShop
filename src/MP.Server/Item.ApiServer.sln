@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer", "ApiServer\ApiServer.csproj", "{5C349A39-2A61-4604-85E0-E423A68B1282}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer.Common", "ApiServer.Common\ApiServer.Common.csproj", "{5E35A683-BB78-43A5-8F68-B99132A1E0B3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer.BLL", "ApiServer.BLL\ApiServer.BLL.csproj", "{A7E621AD-9ACE-4E3F-B0FB-DA79A2376B47}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer.DAL", "ApiServer.DAL\ApiServer.DAL.csproj", "{8EF6CA57-415E-49C0-95A7-BBBE12DE8774}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer.Model", "ApiServer.Model\ApiServer.Model.csproj", "{13821624-9784-4DD8-BB03-A8CBF719AFF3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer.RabbitMQ", "ApiServer.RabbitMQ\ApiServer.RabbitMQ.csproj", "{6B7B084D-89C2-4F37-B0AB-8CFAC2DB9F1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiServer.Extensions", "ApiServer.Extensions\ApiServer.Extensions.csproj", "{918CEC32-1538-4CD2-958B-CD0469DEEB5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C349A39-2A61-4604-85E0-E423A68B1282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C349A39-2A61-4604-85E0-E423A68B1282}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C349A39-2A61-4604-85E0-E423A68B1282}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C349A39-2A61-4604-85E0-E423A68B1282}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E35A683-BB78-43A5-8F68-B99132A1E0B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E35A683-BB78-43A5-8F68-B99132A1E0B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E35A683-BB78-43A5-8F68-B99132A1E0B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E35A683-BB78-43A5-8F68-B99132A1E0B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7E621AD-9ACE-4E3F-B0FB-DA79A2376B47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7E621AD-9ACE-4E3F-B0FB-DA79A2376B47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7E621AD-9ACE-4E3F-B0FB-DA79A2376B47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7E621AD-9ACE-4E3F-B0FB-DA79A2376B47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EF6CA57-415E-49C0-95A7-BBBE12DE8774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EF6CA57-415E-49C0-95A7-BBBE12DE8774}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EF6CA57-415E-49C0-95A7-BBBE12DE8774}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EF6CA57-415E-49C0-95A7-BBBE12DE8774}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13821624-9784-4DD8-BB03-A8CBF719AFF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13821624-9784-4DD8-BB03-A8CBF719AFF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13821624-9784-4DD8-BB03-A8CBF719AFF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13821624-9784-4DD8-BB03-A8CBF719AFF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B7B084D-89C2-4F37-B0AB-8CFAC2DB9F1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B7B084D-89C2-4F37-B0AB-8CFAC2DB9F1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B7B084D-89C2-4F37-B0AB-8CFAC2DB9F1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B7B084D-89C2-4F37-B0AB-8CFAC2DB9F1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{918CEC32-1538-4CD2-958B-CD0469DEEB5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{918CEC32-1538-4CD2-958B-CD0469DEEB5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{918CEC32-1538-4CD2-958B-CD0469DEEB5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{918CEC32-1538-4CD2-958B-CD0469DEEB5D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2A881AC3-2900-4D60-915D-4F988706EF2F}
+	EndGlobalSection
+EndGlobal
