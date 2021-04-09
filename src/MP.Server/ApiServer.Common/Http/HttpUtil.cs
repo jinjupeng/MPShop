@@ -7,6 +7,10 @@ namespace ApiServer.Common.Http
 {
     public class HttpUtil
     {
+        //[WebClient, HttpClient, HttpWebRequest ,RestSharp之间的区别与抉择](https://www.cnblogs.com/xiaoliangge/p/9535027.html)
+        //[C#中HttpWebRequest、WebClient、HttpClient的使用详解](https://www.jb51.net/article/177025.htm)
+        //https://stackoverflow.com/questions/27793761/httpclient-vs-httpwebrequest-for-better-performance-security-and-less-connectio
+
         /// <summary>
         /// get请求
         /// </summary>
