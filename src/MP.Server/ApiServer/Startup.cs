@@ -1,4 +1,5 @@
-﻿using ApiServer.BLL.BLL;
+﻿using ApiServer.Auth.WeChat.MiniProgram;
+using ApiServer.BLL.BLL;
 using ApiServer.BLL.IBLL;
 using ApiServer.Common;
 using ApiServer.Common.Auth;
@@ -6,8 +7,8 @@ using ApiServer.Common.Config;
 using ApiServer.Extensions.Attributes;
 using ApiServer.Extensions.Auth;
 using ApiServer.Extensions.AutofacModule;
-using ApiServer.Extensions.Mapping;
 using ApiServer.Extensions.Filters;
+using ApiServer.Extensions.Mapping;
 using ApiServer.Extensions.ServiceExensions;
 using ApiServer.Model.Entity;
 using ApiServer.Model.Enum;
@@ -36,7 +37,6 @@ using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.HttpOverrides;
 
 namespace ApiServer
 {
@@ -54,22 +54,23 @@ namespace ApiServer
         // 使用DI将服务注入到容器中
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAllServices();
             services.AddControllers().AddNewtonsoftJson(
             options =>
             {
-                    // 序列化时忽略循环
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                    // 使用驼峰命名
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                    // Enum转换为字符串
-                    options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
-                    // Int64转换为字符串
-                    options.SerializerSettings.Converters.Add(new Int64ToStringConvert());
-                    options.SerializerSettings.Converters.Add(new NullableInt64ToStringConvert());
-                    // 序列化时是否忽略空值
-                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-                    // 序列化时的时间格式
-                    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                // 序列化时忽略循环
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                // 使用驼峰命名
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                // Enum转换为字符串
+                options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+                // Int64转换为字符串
+                options.SerializerSettings.Converters.Add(new Int64ToStringConvert());
+                options.SerializerSettings.Converters.Add(new NullableInt64ToStringConvert());
+                // 序列化时是否忽略空值
+                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                // 序列化时的时间格式
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             });
 
             services.Configure<FormOptions>(options =>
@@ -119,6 +120,8 @@ namespace ApiServer
             }
 
             services.AddRabbitMQ(Configuration);
+
+            services.AddWXMiniProgramHttpClient();
 
             #region 配置文件绑定
 
@@ -348,6 +351,8 @@ namespace ApiServer
 
             // 启用限流,需在UseMvc前面
             app.UseIpRateLimiting();
+
+            app.UseWeChatMiniProgram(); //注册微信小程序登陆中间件
 
             // 允许跨域
             app.UseCors("cors");

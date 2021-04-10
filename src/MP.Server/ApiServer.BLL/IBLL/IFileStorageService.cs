@@ -1,8 +1,5 @@
 ﻿using ApiServer.Model.Enum;
 using ApiServer.Model.Files;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ApiServer.BLL.IBLL

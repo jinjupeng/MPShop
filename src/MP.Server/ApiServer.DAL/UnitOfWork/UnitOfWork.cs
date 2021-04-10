@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Data;
 using System.Threading.Tasks;
 
 namespace ApiServer.DAL.UnitOfWork
@@ -57,7 +56,7 @@ namespace ApiServer.DAL.UnitOfWork
                 {
                     CurrentTransaction.Commit();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     _logger.LogError("事务提交异常");
                     throw new Exception(ex.Message);

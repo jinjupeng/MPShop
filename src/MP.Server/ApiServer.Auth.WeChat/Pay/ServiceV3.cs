@@ -1,9 +1,6 @@
 ﻿using ApiServer.Auth.WeChat.Pay.Entities;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ApiServer.Auth.WeChat.Pay

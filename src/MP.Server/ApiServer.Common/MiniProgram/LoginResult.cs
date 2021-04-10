@@ -1,9 +1,6 @@
-﻿using ApiServer.Auth.WeChat.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
 
-namespace ApiServer.Auth.WeChat.MiniProgram
+namespace ApiServer.Common.MiniProgram
 {
     public class LoginResult : WechatResult
     {

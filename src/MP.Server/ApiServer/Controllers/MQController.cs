@@ -31,7 +31,8 @@ namespace ApiServer.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ConsumeMsg()
         {
-            Func<string, bool> func = (x) => {
+            Func<string, bool> func = (x) =>
+            {
                 Console.WriteLine(x);
                 return true;
             };

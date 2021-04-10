@@ -13,7 +13,7 @@ namespace ApiServer.Common.Http
     public class HttpClientHelper
     {
         private static readonly object LockObj = new object();
-        private static readonly HttpClient client  = new HttpClient();
+        private static readonly HttpClient client = new HttpClient();
         private static HttpClientHelper clientHelper = null;
 
         /// <summary>

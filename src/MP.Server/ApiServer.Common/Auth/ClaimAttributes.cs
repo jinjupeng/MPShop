@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ApiServer.Common.Auth
+﻿namespace ApiServer.Common.Auth
 {
     /// <summary>
     /// Claim属性

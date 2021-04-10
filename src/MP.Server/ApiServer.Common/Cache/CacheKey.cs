@@ -11,7 +11,7 @@ namespace ApiServer.Common.Cache
         /// 登录验证码
         /// <para>ADMIN:AUTH:VERIFYCODE:用户id</para>
         /// </summary>
-        [Description("登录验证码")]  
+        [Description("登录验证码")]
         public const string VERIFYCODE_KEY = "ADMIN:AUTH:VERIFYCODE:{0}";
 
         /// <summary>

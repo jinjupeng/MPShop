@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ApiServer.Auth.WeChat.Pay.Entities
+﻿namespace ApiServer.Auth.WeChat.Pay.Entities
 {
     /// <summary>
     /// jsapi/小程序下单接口的返回值<br />

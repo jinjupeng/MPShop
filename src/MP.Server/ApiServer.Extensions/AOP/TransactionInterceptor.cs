@@ -48,7 +48,7 @@ namespace ApiServer.Extensions.AOP
                         trans.Commit();
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     if (trans != null)
                     {

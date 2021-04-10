@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ApiServer.Auth.WeChat.Common
+﻿namespace ApiServer.Common.MiniProgram
 {
     public class WechatResult
     {

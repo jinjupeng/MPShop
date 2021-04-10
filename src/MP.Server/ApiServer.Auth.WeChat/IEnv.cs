@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ApiServer.Auth.WeChat
+﻿namespace ApiServer.Auth.WeChat
 {
     /*
      * 有时候希望获取当前环境相关数据，但又不想直接引用依赖的包

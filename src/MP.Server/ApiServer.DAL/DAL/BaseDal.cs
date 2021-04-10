@@ -72,7 +72,7 @@ namespace ApiServer.DAL.DAL
         {
             return await _context.Set<T>().AddAsync(entity);
         }
-        
+
 
         public async Task<bool> IsExist(Expression<Func<T, bool>> whereLambda)
         {

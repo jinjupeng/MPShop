@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ApiServer.Model.Model.Config
+﻿namespace ApiServer.Model.Model.Config
 {
     public class AliyunConfig
     {

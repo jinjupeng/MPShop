@@ -23,38 +23,39 @@ namespace ApiServer.Auth.WeChat.Pay
         /// <summary>
         /// 微信支付模块选项对象
         /// </summary>
-        Option option;
+        private readonly Option option;
+
         /// <summary>
         /// 微信支付平台证书提供器
         /// </summary>
-        ICertificateProvider wxCertificateProvider
-        {
-            get
-            {
-                return serviceProvider.GetService<ICertificateProvider>();
-            }
-        }
+        private ICertificateProvider wxCertificateProvider;
+
         /// <summary>
         /// 时钟
         /// </summary>
-        IClock clock;
+        private readonly IClock clock;
+
         /// <summary>
         /// 商户api证书序号
         /// </summary>
-        string serialNo;
+        private string serialNo;
+
         /// <summary>
         /// 商户api证书私钥的base64字节数组
         /// </summary>
-        byte[] privateKeyRawData;
+        private byte[] privateKeyRawData;
+
         /// <summary>
         /// 商户证书
         /// </summary>
-        byte[] certData;
+        private byte[] certData;
+
         /// <summary>
         /// web环境
         /// </summary>
-        IEnv env;
-        IServiceProvider serviceProvider;
+        private readonly IEnv env;
+
+        private readonly IServiceProvider serviceProvider;
 
         /// <summary>
         /// 构造函数注入
@@ -63,13 +64,12 @@ namespace ApiServer.Auth.WeChat.Pay
         /// <param name="serviceProvider"></param>
         /// <param name="webEnvironment"></param>
         /// <param name="clock"></param>
-        public SecretHelper(IOptionsMonitor<Option> option,
-                            //ICertificateProvider wxCertificateProvider,//这样注册ioc容器会报循环依赖，非单例注册也许不会爆，没测试过
-                            IServiceProvider serviceProvider,
-                            IEnv webEnvironment,
-                            IClock clock)
+        public SecretHelper(IOptionsMonitor<Option> option, ICertificateProvider wxCertificateProvider,
+            IServiceProvider serviceProvider, IEnv webEnvironment,
+            IClock clock)
         {
             this.serviceProvider = serviceProvider;
+            this.wxCertificateProvider = wxCertificateProvider;
             this.clock = clock;
             this.env = webEnvironment;
             this.option = option.CurrentValue;

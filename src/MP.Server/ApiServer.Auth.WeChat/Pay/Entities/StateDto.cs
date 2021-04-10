@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ApiServer.Auth.WeChat.Pay.Entities
+﻿namespace ApiServer.Auth.WeChat.Pay.Entities
 {
     /// <summary>
     /// 通用的一个模型，里面包含code、message字段

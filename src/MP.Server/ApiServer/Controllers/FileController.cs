@@ -31,7 +31,7 @@ namespace ApiServer.Controllers
         /// <param name="fileStorageService"></param>
         /// <param name="fileUploadService"></param>
         /// <param name="filePathConfig"></param>
-        public FileController(IFileStorageService fileStorageService,IFileUploadService fileUploadService,
+        public FileController(IFileStorageService fileStorageService, IFileUploadService fileUploadService,
             IOptions<FilePathConfig> filePathConfig)
         {
             _fileStorageService = fileStorageService;

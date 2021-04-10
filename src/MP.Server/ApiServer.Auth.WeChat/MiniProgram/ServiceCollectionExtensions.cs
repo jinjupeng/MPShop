@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ApiServer.Common.MiniProgram;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 
 namespace ApiServer.Auth.WeChat.MiniProgram
 {
@@ -19,6 +19,11 @@ namespace ApiServer.Auth.WeChat.MiniProgram
                 c.BaseAddress = new Uri(Const.HttpClientBaseAddress);
             });
             return services;
+        }
+
+        public static IApplicationBuilder UseWeChatMiniProgram(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<MPLoginMiddleware>();
         }
         //目前没有服务需要注册
         //Option对象使用原生方法就可以了

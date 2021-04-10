@@ -34,7 +34,7 @@ namespace ApiServer.Extensions.AutofacModule
                     .AsImplementedInterfaces();
 
                 // 注册拦截器，注意：不能在BaseService类中使用[Transaction]，因为无效
-                builder.RegisterType<TransactionInterceptor>().AsSelf(); 
+                builder.RegisterType<TransactionInterceptor>().AsSelf();
                 interceptorServiceTypes.Add(typeof(TransactionInterceptor)); // 配置事务拦截器
 
                 // 泛型注册
@@ -58,7 +58,7 @@ namespace ApiServer.Extensions.AutofacModule
                     .InstancePerLifetimeScope();
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message + "\n" + ex.InnerException);
             }

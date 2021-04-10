@@ -235,7 +235,8 @@ namespace ApiServer.BLL.BLL
         public async Task<Dictionary<string, string>> GetAccessTokenAsync(string code)
         {
             var url = "https://api.weixin.qq.com/sns/jscode2session";
-            var info = new WxAuthConfig {
+            var info = new WxAuthConfig
+            {
                 appid = appId,
                 secret = appSecret,
                 js_code = code,

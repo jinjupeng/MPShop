@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ApiServer.Auth.WeChat
+﻿namespace ApiServer.Auth.WeChat
 {
     public class WeChatConst
     {

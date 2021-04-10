@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ApiServer.Auth.WeChat.Pay
+﻿namespace ApiServer.Auth.WeChat.Pay
 {
     /// <summary>
     /// 微信支付相关配置的对象
