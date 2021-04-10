@@ -1,5 +1,6 @@
 ﻿using ApiServer.Common.MiniProgram;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
@@ -12,8 +13,11 @@ namespace ApiServer.Auth.WeChat.MiniProgram
         {
             return httpClientFactory.CreateClient(Const.HttpClientName);
         }
-        public static IServiceCollection AddWXMiniProgramHttpClient(this IServiceCollection services)
+        public static IServiceCollection AddWXMiniProgramHttpClient(this IServiceCollection services, IConfiguration cfg)
         {
+            //var config = new Option();
+            //cfg.GetSection("WeChat:MiniProgram").Bind(config);
+            services.Configure<Option>(cfg.GetSection("WeChat:MiniProgram"));
             services.AddHttpClient(Const.HttpClientName, c =>
             {
                 c.BaseAddress = new Uri(Const.HttpClientBaseAddress);

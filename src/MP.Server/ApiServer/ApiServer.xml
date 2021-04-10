@@ -80,6 +80,13 @@
             微信小程序用户登录
             </summary>
         </member>
+        <member name="M:ApiServer.Controllers.MPUserController.wexin_login2">
+            <summary>
+            正规的小程序登录方式
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
         <member name="T:ApiServer.Controllers.SysApiController">
             <summary>
             

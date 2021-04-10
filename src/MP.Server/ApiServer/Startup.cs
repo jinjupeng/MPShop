@@ -121,7 +121,7 @@ namespace ApiServer
 
             services.AddRabbitMQ(Configuration);
 
-            services.AddWXMiniProgramHttpClient();
+            services.AddWXMiniProgramHttpClient(Configuration);
 
             #region 配置文件绑定
 
@@ -347,7 +347,7 @@ namespace ApiServer
             }
 
             // http重定向到https
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             // 启用限流,需在UseMvc前面
             app.UseIpRateLimiting();
