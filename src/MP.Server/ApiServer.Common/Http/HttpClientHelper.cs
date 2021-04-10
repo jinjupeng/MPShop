@@ -8,29 +8,39 @@ namespace ApiServer.Common.Http
 {
     /// <summary>
     /// 饿汉式-单例模式
+    /// https://www.shuzhiduo.com/A/o75NZVyj5W/
     /// </summary>
     public class HttpClientHelper
     {
         private static readonly object LockObj = new object();
-        private static HttpClient client = null;
+        private static readonly HttpClient client  = new HttpClient();
+        private static HttpClientHelper clientHelper = null;
 
-        public HttpClientHelper()
+        /// <summary>
+        /// 构造函数为 private，这样该类就不会被实例化
+        /// </summary>
+        private HttpClientHelper()
         {
             GetInstance();
         }
-        public static HttpClient GetInstance()
+
+        /// <summary>
+        /// 获取唯一可用的对象
+        /// </summary>
+        /// <returns></returns>
+        public static HttpClientHelper GetInstance()
         {
-            if (client == null)
+            if (clientHelper == null)
             {
                 lock (LockObj)
                 {
-                    if (client == null)
+                    if (clientHelper == null) // 双重检查
                     {
-                        client = new HttpClient();
+                        clientHelper = new HttpClientHelper();
                     }
                 }
             }
-            return client;
+            return clientHelper;
         }
 
         /// <summary>

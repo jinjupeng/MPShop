@@ -6,6 +6,7 @@ using ApiServer.Common.Encrypt;
 using ApiServer.Common.Helpers;
 using ApiServer.Common.Http;
 using ApiServer.Model.Entity;
+using ApiServer.Model.Model.Config;
 using ApiServer.Model.Model.MsgModel;
 using ApiServer.Model.Model.ViewModel;
 using ApiServer.Model.Model.WX;
@@ -82,7 +83,7 @@ namespace ApiServer.BLL.BLL
             var dict = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
             var uuid = Guid.NewGuid().ToString();
             // 将值dict放入到缓存中
-            var cacheKey = string.Format(CacheKey.Wx_Session_Id, uuid);
+            var cacheKey = string.Format(CacheKey.WX_SESSIONID_KEY, uuid);
             _cacheService.Add(cacheKey, dict);
             return uuid;
         }
@@ -96,7 +97,7 @@ namespace ApiServer.BLL.BLL
         /// <returns></returns>
         public string WxDecrypt(string encryptedData, string sessionId, string vi)
         {
-            var cacheKey = string.Format(CacheKey.Wx_Session_Id, sessionId);
+            var cacheKey = string.Format(CacheKey.WX_SESSIONID_KEY, sessionId);
             var dict = (Dictionary<string, object>)_cacheService.GetValue(cacheKey);
             var sessionKey = dict["session_key"].ToString();
             return WXBizDataCrypt.AESDecrypt(encryptedData, sessionKey, vi);
@@ -205,5 +206,87 @@ namespace ApiServer.BLL.BLL
             ctx.HttpContext.Response.Redirect(targetUrl);
         }
 
+        /// <summary>
+        /// 根据授权获取到的code，换取access token和openid
+        /// 获取openid之后，可以调用`wechat.API`来获取更多信息
+        /// Examples:
+        /// ```
+        /// api.getAccessToken(code);
+        /// ```
+        /// Exception:
+        ///
+        /// - `err`, 获取access token出现异常时的异常对象
+        ///
+        /// 返回值:
+        /// ```
+        /// {
+        ///  data: {
+        ///    "access_token": "ACCESS_TOKEN",
+        ///    "expires_in": 7200,
+        ///    "refresh_token": "REFRESH_TOKEN",
+        ///    "openid": "OPENID",
+        ///    "scope": "SCOPE"
+        ///  }
+        /// }
+        /// ```
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public async Task<Dictionary<string, string>> GetAccessTokenAsync(string code)
+        {
+            var url = "https://api.weixin.qq.com/sns/jscode2session";
+            var info = new WxAuthConfig {
+                appid = appId,
+                secret = appSecret,
+                js_code = code,
+                grant_type = "authorization_code"
+            };
+
+            var instance = HttpClientHelper.GetInstance();
+            var response = await instance.PostAsync(url, JsonConvert.SerializeObject(info));
+
+            return JsonConvert.DeserializeObject<Dictionary<string, string>>(response);
+        }
+
+        /// <summary>
+        /// 根据refresh token，刷新access token，调用getAccessToken后才有效
+        /// Examples:
+        /// ```
+        /// api.refreshAccessToken(refreshToken);
+        /// ```
+        /// Exception:
+        ///
+        /// - `err`, 刷新access token出现异常时的异常对象
+        ///
+        /// 返回值:
+        /// ```
+        /// {
+        ///  data: {
+        ///    "access_token": "ACCESS_TOKEN",
+        ///    "expires_in": 7200,
+        ///    "refresh_token": "REFRESH_TOKEN",
+        ///    "openid": "OPENID",
+        ///    "scope": "SCOPE"
+        ///  }
+        /// }
+        /// ```
+        /// </summary>
+        /// <param name="refreshToken"></param>
+        /// <returns></returns>
+        public async Task<Dictionary<string, string>> RefreshAccessTokenAsync(string refreshToken)
+        {
+            var url = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
+            var info = new
+            {
+                appid = appId,
+                refresh_token = refreshToken,
+                grant_type = "refresh_token"
+            };
+
+            var instance = HttpClientHelper.GetInstance();
+            var response = await instance.PostAsync(url, JsonConvert.SerializeObject(info));
+
+            return JsonConvert.DeserializeObject<Dictionary<string, string>>(response);
+        }
     }
 }

@@ -75,6 +75,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:ApiServer.Controllers.MPUserController">
+            <summary>
+            微信小程序用户登录
+            </summary>
+        </member>
         <member name="T:ApiServer.Controllers.SysApiController">
             <summary>
             
