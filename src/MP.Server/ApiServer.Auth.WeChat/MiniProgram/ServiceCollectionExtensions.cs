@@ -15,8 +15,6 @@ namespace ApiServer.Auth.WeChat.MiniProgram
         }
         public static IServiceCollection AddWXMiniProgramHttpClient(this IServiceCollection services, IConfiguration cfg)
         {
-            //var config = new Option();
-            //cfg.GetSection("WeChat:MiniProgram").Bind(config);
             services.Configure<Option>(cfg.GetSection("WeChat:MiniProgram"));
             services.AddHttpClient(Const.HttpClientName, c =>
             {
@@ -29,11 +27,5 @@ namespace ApiServer.Auth.WeChat.MiniProgram
         {
             return builder.UseMiddleware<MPLoginMiddleware>();
         }
-        //目前没有服务需要注册
-        //Option对象使用原生方法就可以了
-        //public static IServiceCollection AddWeChatMiniProgram(this IServiceCollection services)
-        //{
-
-        //}
     }
 }

@@ -8,5 +8,7 @@ namespace ApiServer.Auth.Abstractions.LoginModels
         public HttpContext Context { get; set; }
         public LoginResult Token { get; set; }
         public Option Option { get; set; }
+
+        public WeChatInfo WeChatInfo { get; set; }
     }
 }

@@ -26,25 +26,11 @@ namespace ApiServer.Controllers
         /// <summary>
         /// 正规的小程序登录方式
         /// </summary>
-        /// <param name="obj"></param>
         /// <returns></returns>
         [HttpPost]
         [Route("wexin-login2")]
         public async Task<IActionResult> wexin_login2()
         {
-            //var dict = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(obj));
-            //var code = Convert.ToString(dict["code"]);
-            //var userInfo = Convert.ToString(dict["userInfo"]);
-            //var encryptedData = Convert.ToString(dict["encryptedData"]);
-            //var iv = Convert.ToString(dict["iv"]);
-            //var sessionKeyIsValid = Convert.ToBoolean(dict["sessionKeyIsValid"]);
-
-            //// 如果客户端有token，则传来，解析
-            //if (sessionKeyIsValid)
-            //{
-            //    var token =
-            //}
-
             return Ok(await Task.FromResult(""));
         }
     }

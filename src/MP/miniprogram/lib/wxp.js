@@ -3,8 +3,8 @@ import {
 } from 'miniprogram-api-promise';
 
 // const wxp = {}
-// http://localhost:3000
-const URL_BASE = 'http://10.2.10.173:3000'
+ const URL_BASE = 'http://localhost:3009'
+// const URL_BASE = 'http://10.2.10.173:3000'
 
 const wxp = {
   URL_BASE

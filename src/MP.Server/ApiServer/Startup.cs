@@ -119,6 +119,8 @@ namespace ApiServer
                 #endregion
             }
 
+            services.AddHttpClient();
+
             services.AddRabbitMQ(Configuration);
 
             services.AddWXMiniProgramHttpClient(Configuration);

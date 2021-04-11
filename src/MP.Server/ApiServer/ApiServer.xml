@@ -84,7 +84,6 @@
             <summary>
             正规的小程序登录方式
             </summary>
-            <param name="obj"></param>
             <returns></returns>
         </member>
         <member name="T:ApiServer.Controllers.SysApiController">

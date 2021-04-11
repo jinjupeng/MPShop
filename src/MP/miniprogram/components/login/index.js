@@ -29,7 +29,7 @@ Component({
         visible: false
       })
     },
-    async login(e, retryNum = 0) {
+    async login(e, retryNum = 3) {
       let {
         userInfo,
         encryptedData,
@@ -55,7 +55,7 @@ Component({
         console.log("code",code);
         
         let res = await getApp().wxp.request({
-          url: `${getApp().wxp.URL_BASE}/user/wexin-login2`,
+          url: `${getApp().wxp.URL_BASE}/api/mpuser/wexin-login2`,
           method: 'POST',
           header: {
             'content-type': 'application/json',
@@ -97,6 +97,7 @@ Component({
       getApp().globalEvent.emit('loginSuccess')
 
     },
+    /*
     login2(e) {
       let {
         userInfo,
@@ -108,7 +109,7 @@ Component({
       const requestLoginApi = (code) => {
         //发起网络请求
         wx.request({
-          url: 'http://localhost:3000/user/wexin-login2',
+          url: 'http://localhost:3009/mpuser/wexin-login2',
           method: 'POST',
           header: {
             'content-type': 'application/json'
@@ -173,5 +174,6 @@ Component({
       })
 
     }
+    */
   }
 })
