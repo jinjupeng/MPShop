@@ -80,7 +80,7 @@ Page({
 
   async onShow(){
     let res = await getApp().wxp.request4({
-      url:'http://localhost:3000/user/my/carts',
+      url:'http://localhost:3009/api/mpuser/my/carts',
       method:'get'
     })
     if (res.data.msg == "ok"){

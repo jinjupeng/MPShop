@@ -8,12 +8,6 @@ namespace ApiServer.Common.Result
     public class ResultModel<T> : IResultModel<T>
     {
         /// <summary>
-        /// 处理是否成功
-        /// </summary>
-        [JsonIgnore]
-        public bool Successful { get; private set; }
-
-        /// <summary>
         /// 错误信息
         /// </summary>
         public string Msg { get; private set; }
@@ -21,7 +15,7 @@ namespace ApiServer.Common.Result
         /// <summary>
         /// 状态码
         /// </summary>
-        public int Code => Successful ? 1 : 0;
+        public int Code { get; set; } = 200;
 
         /// <summary>
         /// 返回数据
@@ -35,7 +29,7 @@ namespace ApiServer.Common.Result
         /// <param name="msg">说明</param>
         public ResultModel<T> Success(T data = default, string msg = "success")
         {
-            Successful = true;
+            Code = 200;
             Data = data;
             Msg = msg;
 
@@ -48,7 +42,7 @@ namespace ApiServer.Common.Result
         /// <param name="msg">说明</param>
         public ResultModel<T> Failed(string msg = "failed")
         {
-            Successful = false;
+            Code = 500;
             Msg = msg;
             return this;
         }

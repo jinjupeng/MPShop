@@ -8,12 +8,6 @@ namespace ApiServer.Common.Result
     public interface IResultModel
     {
         /// <summary>
-        /// 是否成功
-        /// </summary>
-        [JsonIgnore]
-        bool Successful { get; }
-
-        /// <summary>
         /// 错误
         /// </summary>
         string Msg { get; }

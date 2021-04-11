@@ -49,6 +49,36 @@
             <param name="form"></param>
             <returns></returns>
         </member>
+        <member name="M:ApiServer.Controllers.GoodsController.#ctor(ApiServer.BLL.IBLL.IBaseService{ApiServer.Model.Entity.goods},ApiServer.BLL.IBLL.IBaseService{ApiServer.Model.Entity.goods_category},ApiServer.BLL.IBLL.IBaseService{ApiServer.Model.Entity.goods_sku},ApiServer.BLL.IBLL.IBaseService{ApiServer.Model.Entity.goods_attr_key},ApiServer.BLL.IBLL.IBaseService{ApiServer.Model.Entity.goods_info})">
+            <summary>
+            
+            </summary>
+            <param name="baseService"></param>
+        </member>
+        <member name="M:ApiServer.Controllers.GoodsController.GetCategories">
+            <summary>
+            获取分类集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiServer.Controllers.GoodsController.GetGoods(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            获取产品集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiServer.Controllers.GoodsController.GetGood(System.Int32)">
+            <summary>
+            获取产品详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiServer.Controllers.GoodsController.GetGoodSku(System.Int32)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ApiServer.Controllers.JwtAuthController">
             <summary>
             
@@ -83,6 +113,60 @@
         <member name="M:ApiServer.Controllers.MPUserController.wexin_login2">
             <summary>
             正规的小程序登录方式
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiServer.Controllers.MPUserController.GetMyCarts(System.Int32)">
+            <summary>
+            我的购物车商品集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiServer.Controllers.MPUserController.UpdateMyCart">
+            <summary>
+            修改购物车数量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiServer.Controllers.MPUserController.DelMyCart">
+            <summary>
+            删除购物车商品
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiServer.Controllers.MPUserController.AddMyCart">
+            <summary>
+            新增购物车商品
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiServer.Controllers.MPUserController.GetMyAddress">
+            <summary>
+            我的地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiServer.Controllers.MPUserController.AddMyAddress">
+            <summary>
+            新增我的地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiServer.Controllers.MPUserController.UpdateMyAddress">
+            <summary>
+            修改我的地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiServer.Controllers.MPUserController.DelMyAddress">
+            <summary>
+            删除我的地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiServer.Controllers.OrderController.Order">
+            <summary>
+            下新订单，准备支付
             </summary>
             <returns></returns>
         </member>
