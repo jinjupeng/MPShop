@@ -21,14 +21,14 @@ namespace ApiServer.DAL.IDAL
         IQueryable<T> GetModels(Expression<Func<T, bool>> whereLambda);
         IQueryable<T> QueryByPage<TKey>(int pageIndex, int pageSize, Expression<Func<T, bool>> whereLambda, Expression<Func<T, TKey>> orderBy);
 
-        bool SaveChanges();
+        bool SaveChangesAsync();
 
         T Add(T entity);
 
         T Update(T entity);
 
         bool Remove(T entity);
-        ValueTask<EntityEntry<T>> Insert(T entity);
+        ValueTask<EntityEntry<T>> InsertAsync(T entity);
 
         Task<T> AddAsync(T entity, CancellationToken cancellationToken = default);
 
@@ -36,14 +36,14 @@ namespace ApiServer.DAL.IDAL
 
         Task<bool> RemoveAsync(T entity);
 
-        Task<bool> IsExist(Expression<Func<T, bool>> whereLambda);
+        Task<bool> IsExistAsync(Expression<Func<T, bool>> whereLambda);
 
-        Task<T> GetEntity(Expression<Func<T, bool>> whereLambda);
+        Task<T> GetEntityAsync(Expression<Func<T, bool>> whereLambda);
 
-        Task<List<T>> Select();
+        Task<List<T>> SelectAsync();
 
-        Task<List<T>> Select(Expression<Func<T, bool>> whereLambda);
+        Task<List<T>> SelectAsync(Expression<Func<T, bool>> whereLambda);
 
-        Task<Tuple<List<T>, int>> Select<S>(int pageSize, int pageIndex, Expression<Func<T, bool>> whereLambda, Expression<Func<T, S>> orderByLambda, bool isAsc);
+        Task<Tuple<List<T>, int>> SelectAsync<S>(int pageSize, int pageIndex, Expression<Func<T, bool>> whereLambda, Expression<Func<T, S>> orderByLambda, bool isAsc);
     }
 }

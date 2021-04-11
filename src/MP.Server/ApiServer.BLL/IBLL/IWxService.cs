@@ -15,6 +15,5 @@ namespace ApiServer.BLL.IBLL
         Task<Dictionary<string, string>> GetSignatureAsync(string url);
         Task<Dictionary<string, string>> GetOpenIdAsync(string code);
         Task<Dictionary<string, string>> GetUserInfoAsync(string access_token, string openid);
-        void StartGetUserInfo(HttpRequest ctx, bool getUserInfo = false);
     }
 }

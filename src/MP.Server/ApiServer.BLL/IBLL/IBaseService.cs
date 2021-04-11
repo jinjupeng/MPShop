@@ -3,17 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ApiServer.BLL.IBLL
 {
     public interface IBaseService<T> where T : class
     {
-        bool AddRange(IEnumerable<T> t);
         bool AddRange(params T[] t);
         bool DeleteRange(IEnumerable<T> t);
         bool DeleteRange(params T[] t);
-        bool UpdateRange(IEnumerable<T> t);
         bool UpdateRange(params T[] t);
 
         /// <summary>
@@ -25,18 +24,31 @@ namespace ApiServer.BLL.IBLL
 
         PageModel<T> QueryByPage<TKey>(int pageIndex, int pageSize, Expression<Func<T, bool>> whereLambda, Expression<Func<T, TKey>> orderBy);
 
-        Task<int> Insert(T entity);
+        Task<int> InsertAndSaveAsync(T entity);
 
-        Task<int> Update(T entity);
+        Task<int> UpdateAndSaveAsync(T entity);
 
-        Task<bool> IsExist(Expression<Func<T, bool>> whereLambda);
+        Task<bool> IsExistAsync(Expression<Func<T, bool>> whereLambda);
 
-        Task<T> GetEntity(Expression<Func<T, bool>> whereLambda);
+        Task<T> GetEntityAsync(Expression<Func<T, bool>> whereLambda);
 
-        Task<List<T>> Select();
+        Task<List<T>> SelectAsync();
 
-        Task<List<T>> Select(Expression<Func<T, bool>> whereLambda);
+        Task<List<T>> SelectAsync(Expression<Func<T, bool>> whereLambda);
 
-        Task<Tuple<List<T>, int>> Select<S>(int pageSize, int pageIndex, Expression<Func<T, bool>> whereLambda, Expression<Func<T, S>> orderByLambda, bool isAsc);
+        Task<Tuple<List<T>, int>> SelectAsync<S>(int pageSize, int pageIndex, Expression<Func<T, bool>> whereLambda, Expression<Func<T, S>> orderByLambda, bool isAsc);
+
+        Task<T> AddAsync(T entity, CancellationToken cancellationToken = default);
+
+        Task<T> UpdateAsync(T entity, CancellationToken cancellationToken = default);
+
+        Task<bool> RemoveAsync(T entity, CancellationToken cancellationToken = default);
+
+        T Add(T entity);
+
+        T Update(T entity);
+
+        bool Remove(T entity);
+
     }
 }

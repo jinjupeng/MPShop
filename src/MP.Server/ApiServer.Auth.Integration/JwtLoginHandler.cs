@@ -25,7 +25,7 @@ namespace ApiServer.Auth.Integration
         }
 
         /// <summary>
-        /// 返回登录信息
+        /// 普通用户登录处理
         /// </summary>
         /// <param name="claims"></param>
         /// <param name="extendData"></param>

@@ -3,13 +3,11 @@ using ApiServer.Auth.Abstractions.LoginModels;
 using ApiServer.BLL.IBLL;
 using ApiServer.Common.Attributes;
 using ApiServer.Common.Encrypt;
-using ApiServer.Common.MiniProgram;
 using ApiServer.Common.Utils;
 using ApiServer.Model.Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -83,14 +81,13 @@ namespace ApiServer.BLL.Handler.LoginHandler
             if (mpUser == null) // 未找到关联本地账号
             {
                 // 向微信服务器请求用户信息，并保存到本地数据库，同时生成jwt返回给小程序端
-                // 将session_key保存到缓存中huotoken中或数据库中
-                await _baseService.Insert(mpUser);
+                // 将session_key保存到缓存中或token中或数据库中
+                await _baseService.InsertAndSaveAsync(mpUser);
                 var sessionKey = new session_key {
                     uid = mpUser.id,
                     sessionKey = session_key,
                     createdAt = DateTime.Now
                 };
-                await _sessionKeyService.Insert(sessionKey);
                 var claims = new List<Claim>
                 {
                     new Claim("uid", mpUser.id.ToString()),
@@ -143,18 +140,6 @@ namespace ApiServer.BLL.Handler.LoginHandler
         public Task WriteJsonAsync(object o)
         {
             return this.httpResponse.WriteAsync(JsonExtensions.SerializeToJson(o), this.httpContext.RequestAborted);
-        }
-
-        /// <summary>
-        /// 获取jwt中的payload
-        /// </summary>
-        /// <param name="encodeJwt">格式：Bearer eyAAA.eyBBB.CCC</param>
-        /// <returns></returns>
-        public Dictionary<string, object> GetPayLoad(string encodeJwt)
-        {
-            var jwtArr = encodeJwt.Split('.');
-            var payLoad = JsonSerializer.Deserialize<Dictionary<string, object>>(Base64UrlEncoder.Decode(jwtArr[1]));
-            return payLoad;
         }
     }
 }

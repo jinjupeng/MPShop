@@ -6,18 +6,15 @@ using ApiServer.Common.Encrypt;
 using ApiServer.Common.Helpers;
 using ApiServer.Common.Http;
 using ApiServer.Model.Entity;
-using ApiServer.Model.Model.Config;
 using ApiServer.Model.Model.MsgModel;
 using ApiServer.Model.Model.ViewModel;
 using ApiServer.Model.Model.WX;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace ApiServer.BLL.BLL
 {
@@ -189,105 +186,6 @@ namespace ApiServer.BLL.BLL
             }
 
             return JsonConvert.DeserializeObject<Dictionary<string, string>>(res);
-        }
-
-        /// <summary>
-        /// 准备发生跳转
-        /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="getUserInfo"></param>
-        public void StartGetUserInfo(HttpRequest ctx, bool getUserInfo = false)
-        {
-            var redirectUrl = HttpUtility.UrlEncode($"{ctx.Host}{REBACK_URL}", System.Text.Encoding.GetEncoding(936));
-            var scope = getUserInfo ? "snsapi_userinfo" : "snsapi_base";
-            var state = getUserInfo ? "userinfo" : "base";
-            var targetUrl = $"https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${redirectUrl}&response_type=code&scope=${scope}&state=${state}#wechat_redirect";
-            ctx.HttpContext.Response.StatusCode = 301;
-            ctx.HttpContext.Response.Redirect(targetUrl);
-        }
-
-        /// <summary>
-        /// 根据授权获取到的code，换取access token和openid
-        /// 获取openid之后，可以调用`wechat.API`来获取更多信息
-        /// Examples:
-        /// ```
-        /// api.getAccessToken(code);
-        /// ```
-        /// Exception:
-        ///
-        /// - `err`, 获取access token出现异常时的异常对象
-        ///
-        /// 返回值:
-        /// ```
-        /// {
-        ///  data: {
-        ///    "access_token": "ACCESS_TOKEN",
-        ///    "expires_in": 7200,
-        ///    "refresh_token": "REFRESH_TOKEN",
-        ///    "openid": "OPENID",
-        ///    "scope": "SCOPE"
-        ///  }
-        /// }
-        /// ```
-        /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        public async Task<Dictionary<string, string>> GetAccessTokenAsync(string code)
-        {
-            var url = "https://api.weixin.qq.com/sns/jscode2session";
-            var info = new WxAuthConfig
-            {
-                appid = appId,
-                secret = appSecret,
-                js_code = code,
-                grant_type = "authorization_code"
-            };
-
-            var instance = HttpClientHelper.GetInstance();
-            var response = await instance.PostAsync(url, JsonConvert.SerializeObject(info));
-
-            return JsonConvert.DeserializeObject<Dictionary<string, string>>(response);
-        }
-
-        /// <summary>
-        /// 根据refresh token，刷新access token，调用getAccessToken后才有效
-        /// Examples:
-        /// ```
-        /// api.refreshAccessToken(refreshToken);
-        /// ```
-        /// Exception:
-        ///
-        /// - `err`, 刷新access token出现异常时的异常对象
-        ///
-        /// 返回值:
-        /// ```
-        /// {
-        ///  data: {
-        ///    "access_token": "ACCESS_TOKEN",
-        ///    "expires_in": 7200,
-        ///    "refresh_token": "REFRESH_TOKEN",
-        ///    "openid": "OPENID",
-        ///    "scope": "SCOPE"
-        ///  }
-        /// }
-        /// ```
-        /// </summary>
-        /// <param name="refreshToken"></param>
-        /// <returns></returns>
-        public async Task<Dictionary<string, string>> RefreshAccessTokenAsync(string refreshToken)
-        {
-            var url = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
-            var info = new
-            {
-                appid = appId,
-                refresh_token = refreshToken,
-                grant_type = "refresh_token"
-            };
-
-            var instance = HttpClientHelper.GetInstance();
-            var response = await instance.PostAsync(url, JsonConvert.SerializeObject(info));
-
-            return JsonConvert.DeserializeObject<Dictionary<string, string>>(response);
         }
     }
 }

@@ -61,7 +61,7 @@ namespace ApiServer.Auth.WeChat.MiniProgram
             context.Request.Headers.TryGetValue("Authorization", out StringValues tokenValue);
             var requestToken = tokenValue.ToString();
 
-            if (!weChatInfo.sessionKeyIsValid || !requestToken.Contains('.')) // 如果之前的session_key不可用，则向微信服务器请求新的session_key
+            if (!weChatInfo.sessionKeyIsValid || !requestToken.Contains('.')) // 如果之前的session_key不可用或token不存在，则向微信服务器请求新的session_key
             {
                 #region 获取session_key和openid
 
@@ -83,6 +83,7 @@ namespace ApiServer.Auth.WeChat.MiniProgram
             }
             else
             {
+                // 解析token获取session_key
                 var jwtArr = requestToken.Split('.');
                 var payLoad = JsonSerializer.Deserialize<Dictionary<string, object>>(Base64UrlEncoder.Decode(jwtArr[1]));
                 loginContext.Token.session_key = payLoad["sessionKey"].ToString();

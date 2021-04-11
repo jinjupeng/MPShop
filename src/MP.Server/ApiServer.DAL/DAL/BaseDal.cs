@@ -63,38 +63,38 @@ namespace ApiServer.DAL.DAL
             return _context.Set<T>().Where(whereLambda.Compile()).AsQueryable().OrderBy(orderBy).Skip((pageIndex - 1) * pageSize).Take(pageSize);
         }
 
-        public bool SaveChanges()
+        public bool SaveChangesAsync()
         {
             return _context.SaveChangesAsync().Result > 0;
         }
 
-        public async ValueTask<EntityEntry<T>> Insert(T entity)
+        public async ValueTask<EntityEntry<T>> InsertAsync(T entity)
         {
             return await _context.Set<T>().AddAsync(entity);
         }
 
 
-        public async Task<bool> IsExist(Expression<Func<T, bool>> whereLambda)
+        public async Task<bool> IsExistAsync(Expression<Func<T, bool>> whereLambda)
         {
             return await _context.Set<T>().AnyAsync(whereLambda);
         }
 
-        public async Task<T> GetEntity(Expression<Func<T, bool>> whereLambda)
+        public async Task<T> GetEntityAsync(Expression<Func<T, bool>> whereLambda)
         {
             return await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(whereLambda);
         }
 
-        public async Task<List<T>> Select()
+        public async Task<List<T>> SelectAsync()
         {
             return await _context.Set<T>().ToListAsync();
         }
 
-        public async Task<List<T>> Select(Expression<Func<T, bool>> whereLambda)
+        public async Task<List<T>> SelectAsync(Expression<Func<T, bool>> whereLambda)
         {
             return await _context.Set<T>().Where(whereLambda).ToListAsync();
         }
 
-        public async Task<Tuple<List<T>, int>> Select<S>(int pageSize, int pageIndex, Expression<Func<T, bool>> whereLambda, Expression<Func<T, S>> orderByLambda, bool isAsc)
+        public async Task<Tuple<List<T>, int>> SelectAsync<S>(int pageSize, int pageIndex, Expression<Func<T, bool>> whereLambda, Expression<Func<T, S>> orderByLambda, bool isAsc)
         {
             var total = await _context.Set<T>().Where(whereLambda).CountAsync();
 

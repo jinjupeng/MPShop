@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ApiServer.Auth.Integration\ApiServer.Auth.Integration.csproj" />
     <ProjectReference Include="..\ApiServer.Auth.WeChat\ApiServer.Auth.WeChat.csproj" />
     <ProjectReference Include="..\ApiServer.BLL\ApiServer.BLL.csproj" />
     <ProjectReference Include="..\ApiServer.Common\ApiServer.Common.csproj" />
