@@ -136,7 +136,7 @@ namespace ApiServer
             #endregion
 
             // 数据库上下文注入
-            services.AddDbContext<ContextMySql>(option => option.UseMySql(ConfigTool.Configuration["Setting:Conn"]));
+            services.AddDbContext<ContextMySql>(option => option.UseMySql(ConfigTool.Configuration["Setting:DefaultConnection"]));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
