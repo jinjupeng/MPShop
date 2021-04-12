@@ -105,5 +105,8 @@ namespace ApiServer.Controllers
 
             return Ok(await Task.FromResult(""));
         }
+
+        // 获取轮播图产品信息
+
     }
 }

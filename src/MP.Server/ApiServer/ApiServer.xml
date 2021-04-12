@@ -49,11 +49,20 @@
             <param name="form"></param>
             <returns></returns>
         </member>
+        <member name="T:ApiServer.Controllers.GoodsController">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:ApiServer.Controllers.GoodsController.#ctor(ApiServer.BLL.IBLL.IBaseService{ApiServer.Model.Entity.goods},ApiServer.BLL.IBLL.IBaseService{ApiServer.Model.Entity.goods_category},ApiServer.BLL.IBLL.IBaseService{ApiServer.Model.Entity.goods_sku},ApiServer.BLL.IBLL.IBaseService{ApiServer.Model.Entity.goods_attr_key},ApiServer.BLL.IBLL.IBaseService{ApiServer.Model.Entity.goods_info})">
             <summary>
             
             </summary>
             <param name="baseService"></param>
+            <param name="goodsCategoryService"></param>
+            <param name="goodsSkuService"></param>
+            <param name="goodsAttrKeyService"></param>
+            <param name="goodsInfoService"></param>
         </member>
         <member name="M:ApiServer.Controllers.GoodsController.GetCategories">
             <summary>
@@ -65,6 +74,9 @@
             <summary>
             获取产品集合
             </summary>
+            <param name="category_id"></param>
+            <param name="page_index"></param>
+            <param name="page_size"></param>
             <returns></returns>
         </member>
         <member name="M:ApiServer.Controllers.GoodsController.GetGood(System.Int32)">
@@ -76,6 +88,23 @@
         <member name="M:ApiServer.Controllers.GoodsController.GetGoodSku(System.Int32)">
             <summary>
             
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApiServer.Controllers.GoodsInfoController">
+            <summary>
+            商品详情
+            </summary>
+        </member>
+        <member name="M:ApiServer.Controllers.GoodsInfoController.#ctor(ApiServer.BLL.IBLL.IBaseService{ApiServer.Model.Entity.goods_info})">
+            <summary>
+            
+            </summary>
+            <param name="goodsInfoService"></param>
+        </member>
+        <member name="M:ApiServer.Controllers.GoodsInfoController.GetCarousel">
+            <summary>
+            获取轮播图数据
             </summary>
             <returns></returns>
         </member>
@@ -109,6 +138,13 @@
             <summary>
             微信小程序用户登录
             </summary>
+        </member>
+        <member name="M:ApiServer.Controllers.MPUserController.wexin_login1(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
         </member>
         <member name="M:ApiServer.Controllers.MPUserController.wexin_login2">
             <summary>

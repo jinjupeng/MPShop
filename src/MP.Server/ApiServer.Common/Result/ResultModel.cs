@@ -58,9 +58,9 @@ namespace ApiServer.Common.Result
         /// </summary>
         /// <param name="data">返回数据</param>
         /// <returns></returns>
-        public static IResultModel Success<T>(T data = default(T))
+        public static IResultModel Success<T>(T data = default, string msg = "ok")
         {
-            return new ResultModel<T>().Success(data);
+            return new ResultModel<T>().Success(data, msg);
         }
 
         /// <summary>
