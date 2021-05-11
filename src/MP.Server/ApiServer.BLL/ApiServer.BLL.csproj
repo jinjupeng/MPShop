@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ApiServer.Auth.Abstractions\ApiServer.Auth.Abstractions.csproj" />
     <ProjectReference Include="..\ApiServer.DAL\ApiServer.DAL.csproj" />
   </ItemGroup>
 

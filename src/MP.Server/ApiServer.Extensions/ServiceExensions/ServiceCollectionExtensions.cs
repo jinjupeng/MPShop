@@ -1,6 +1,9 @@
-﻿using ApiServer.Auth.Abstractions;
+﻿using ApiServer.Common.Auth;
+using ApiServer.Common.Config;
 using ApiServer.Common.Result;
+using ApiServer.Extensions.Handlers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.WeChat.MiniProgram;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +13,7 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiServer.Auth.Integration
+namespace ApiServer.Extensions.ServiceExensions
 {
     public static class ServiceCollectionExtensions
     {
@@ -33,6 +36,11 @@ namespace ApiServer.Auth.Integration
                 s.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 s.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 s.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            // 微信小程序登录
+            .AddMiniProgram<MiniProgramLoginHandler>(o => {
+                o.ClientId = ConfigTool.Configuration["WeChat:MiniProgram:AppId"];
+                o.ClientSecret = ConfigTool.Configuration["WeChat:MiniProgram:AppSecret"];
             })
             // 添加JwtBearer验证服务：
             .AddJwtBearer(config =>

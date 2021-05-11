@@ -17,14 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer.RabbitMQ", "ApiSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer.Extensions", "ApiServer.Extensions\ApiServer.Extensions.csproj", "{918CEC32-1538-4CD2-958B-CD0469DEEB5D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auth", "Auth", "{061634BD-9A96-42D1-ACAC-2A7F961B9119}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiServer.Auth.Abstractions", "ApiServer.Auth.Abstractions\ApiServer.Auth.Abstractions.csproj", "{E0DA38D6-11FF-425E-971A-8ED197F17081}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiServer.Auth.Integration", "ApiServer.Auth.Integration\ApiServer.Auth.Integration.csproj", "{15AF6507-C329-4523-AA5D-076E5A037CD7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiServer.Auth.WeChat", "ApiServer.Auth.WeChat\ApiServer.Auth.WeChat.csproj", "{352C742E-E2E5-480E-8390-D24633EF792B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,26 +51,9 @@ Global
 		{918CEC32-1538-4CD2-958B-CD0469DEEB5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{918CEC32-1538-4CD2-958B-CD0469DEEB5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{918CEC32-1538-4CD2-958B-CD0469DEEB5D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E0DA38D6-11FF-425E-971A-8ED197F17081}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0DA38D6-11FF-425E-971A-8ED197F17081}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E0DA38D6-11FF-425E-971A-8ED197F17081}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E0DA38D6-11FF-425E-971A-8ED197F17081}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15AF6507-C329-4523-AA5D-076E5A037CD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15AF6507-C329-4523-AA5D-076E5A037CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15AF6507-C329-4523-AA5D-076E5A037CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15AF6507-C329-4523-AA5D-076E5A037CD7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{352C742E-E2E5-480E-8390-D24633EF792B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{352C742E-E2E5-480E-8390-D24633EF792B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{352C742E-E2E5-480E-8390-D24633EF792B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{352C742E-E2E5-480E-8390-D24633EF792B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{E0DA38D6-11FF-425E-971A-8ED197F17081} = {061634BD-9A96-42D1-ACAC-2A7F961B9119}
-		{15AF6507-C329-4523-AA5D-076E5A037CD7} = {061634BD-9A96-42D1-ACAC-2A7F961B9119}
-		{352C742E-E2E5-480E-8390-D24633EF792B} = {061634BD-9A96-42D1-ACAC-2A7F961B9119}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A881AC3-2900-4D60-915D-4F988706EF2F}

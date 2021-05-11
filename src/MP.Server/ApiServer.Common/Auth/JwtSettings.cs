@@ -23,6 +23,6 @@
         /// <summary>
         /// 过期时间（分钟）
         /// </summary>
-        public string ExpireMinutes { get; set; }
+        public int ExpireMinutes { get; set; }
     }
 }

@@ -1,6 +1,4 @@
-﻿using ApiServer.Auth.Integration;
-using ApiServer.Auth.WeChat.MiniProgram;
-using ApiServer.BLL.BLL;
+﻿using ApiServer.BLL.BLL;
 using ApiServer.BLL.IBLL;
 using ApiServer.Common;
 using ApiServer.Common.Auth;
@@ -123,8 +121,6 @@ namespace ApiServer
             services.AddHttpClient();
 
             services.AddRabbitMQ(Configuration);
-
-            services.AddWXMiniProgramHttpClient(Configuration);
 
             #region 配置文件绑定
 
@@ -355,8 +351,6 @@ namespace ApiServer
 
             // 启用限流,需在UseMvc前面
             app.UseIpRateLimiting();
-
-            app.UseWeChatMiniProgram(); //注册微信小程序登陆中间件
 
             // 允许跨域
             app.UseCors("cors");
