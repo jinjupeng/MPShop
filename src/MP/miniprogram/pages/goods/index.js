@@ -47,7 +47,7 @@ Page({
         goods_sku_desc
       }
       let res = await getApp().wxp.request4({
-        url:'http://localhost:3009/api/mpuser/my/carts',
+        url:'http://localhost:5000/api/mpuser/my/carts',
         method:'post',
         data
       })
@@ -88,7 +88,7 @@ Page({
     })
     // 拉取sku规格数据
     let goodsSkuDataRes = await wx.wxp.request({
-      url: `http://localhost:3009/api/goods/goods/${goodsId}/sku`,
+      url: `http://localhost:5000/api/goods/goods/${goodsId}/sku`,
     })
     if (goodsSkuDataRes){
       let goodsSkuData = goodsSkuDataRes.data.data 

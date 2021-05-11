@@ -11,7 +11,7 @@ Page({
     //   title: 'Loading..',
     // })
     let categories = await wx.wxp.request({
-      url: 'http://localhost:3009/api/goods/categories',
+      url: 'http://localhost:5000/api/goods/categories',
     })
     // console.log(categories);
     
@@ -52,7 +52,7 @@ Page({
     })
     let goodsId = e.currentTarget.dataset.id 
     let goods = await wx.wxp.request({
-      url: `http://localhost:3009/api/goods/goods/${goodsId}`,
+      url: `http://localhost:5000/api/goods/goods/${goodsId}`,
     })
     console.log(goods)
    
@@ -97,7 +97,7 @@ Page({
       }
     }
     let goodsData = await wx.wxp.request({
-      url: `http://localhost:3009/api/goods/goods?page_index=${pageIndex}&page_size=${pageSize}&category_id=${categoryId}`,
+      url: `http://localhost:5000/api/goods/goods?page_index=${pageIndex}&page_size=${pageSize}&category_id=${categoryId}`,
     })
     if (goodsData){
       goodsData = goodsData.data.data;

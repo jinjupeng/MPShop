@@ -46,7 +46,7 @@ Page({
   async onLoad() {
     let imgArr = [];
     let res = await wx.wxp.request({
-      url:'http://localhost:3009/api/goodsinfo/GetCarousel'
+      url:'http://localhost:5000/api/goodsinfo/GetCarousel'
     })
     if (res.data.msg == 'ok'){
       let dataList = res.data.data;
