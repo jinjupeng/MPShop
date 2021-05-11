@@ -55,7 +55,7 @@ Component({
         console.log("code",code);
         
         let res = await getApp().wxp.request({
-          url: `${getApp().wxp.URL_BASE}/api/mpuser/wexin-login2`,
+          url: `${getApp().wxp.URL_BASE}/signin-wechat-miniprogram`,
           method: 'POST',
           header: {
             'content-type': 'application/json',

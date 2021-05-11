@@ -54,9 +54,11 @@ namespace ApiServer.Extensions.Handlers
                 var deMPUserInfo = WXBizDataCrypt.AESDecrypt(encryptedData, session_key, iv);
                 var mpUser = JsonSerializer.Deserialize<mp_user>(deMPUserInfo);
                 var openId = mpUser?.openId;
-                var mpUserIsExist = _baseService.GetModels(a => a.openId == openId).Any();
-                if (mpUserIsExist) // 如果登录用户存在
+                var mpUserModel = _baseService.GetModels(a => a.openId == openId).SingleOrDefault();
+                if (mpUserModel != default) // 如果登录用户存在
                 {
+                    mpUserModel.updatedAt = DateTime.Now;
+                    var updateResult = await _baseService.UpdateAsync(mpUserModel);
                     // 生成jwt，返回给小程序端
                     var claims = new List<Claim>
                     {
@@ -68,7 +70,7 @@ namespace ApiServer.Extensions.Handlers
                     };
 
                     var accessToken = IssueJwt(claims);
-                    var userInfo = MapUtils.ObjectToMap(mpUser);
+                    var userInfo = MapUtils.ObjectToMap(updateResult);
                     userInfo.Add("authorizationToken", accessToken);
                     this.httpResponse.ContentType = "application/json";
                     this.httpResponse.StatusCode = 200;
@@ -79,12 +81,12 @@ namespace ApiServer.Extensions.Handlers
                         data = userInfo
                     });
                 }
-
-                if (mpUser == null) // 未找到关联本地账号
+                else // 未找到关联本地账号
                 {
-                    // 向微信服务器请求用户信息，并保存到本地数据库，同时生成jwt返回给小程序端
+                    // 将小程序登录用户信息保存到本地数据库，同时生成jwt返回给小程序端
                     // 将session_key保存到缓存中或token中或数据库中
-                    await _baseService.InsertAndSaveAsync(mpUser);
+                    mpUser.createdAt = DateTime.Now;
+                    var insertResult = await _baseService.AddAsync(mpUser);
                     var sessionKey = new session_key
                     {
                         uid = mpUser.id,
@@ -100,7 +102,7 @@ namespace ApiServer.Extensions.Handlers
                         new Claim("sessionKey", session_key)
                     };
                     var accessToken = IssueJwt(claims);
-                    var userInfo = MapUtils.ObjectToMap(mpUser);
+                    var userInfo = MapUtils.ObjectToMap(insertResult);
                     userInfo.Add("authorizationToken", accessToken);
                     this.httpResponse.ContentType = "application/json";
                     this.httpResponse.StatusCode = 200;
