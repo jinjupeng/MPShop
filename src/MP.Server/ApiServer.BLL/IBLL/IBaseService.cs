@@ -44,6 +44,8 @@ namespace ApiServer.BLL.IBLL
 
         Task<bool> RemoveAsync(T entity, CancellationToken cancellationToken = default);
 
+        Task<bool> RemoveAsync(Expression<Func<T, bool>> express, CancellationToken cancellationToken = default);
+
         T Add(T entity);
 
         T Update(T entity);

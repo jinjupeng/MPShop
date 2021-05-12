@@ -7,6 +7,7 @@ namespace ApiServer.Common.Result
     /// </summary>
     public class ResultModel<T> : IResultModel<T>
     {
+        public bool isok { get; set; } = true;
         /// <summary>
         /// 错误信息
         /// </summary>
@@ -32,6 +33,7 @@ namespace ApiServer.Common.Result
             Code = 200;
             Data = data;
             Msg = msg;
+            isok = true;
 
             return this;
         }
@@ -44,6 +46,8 @@ namespace ApiServer.Common.Result
         {
             Code = 500;
             Msg = msg;
+            isok = false;
+
             return this;
         }
     }

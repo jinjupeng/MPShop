@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ApiServer.BLL.IBLL;
+using ApiServer.Common;
+using ApiServer.Common.Result;
+using ApiServer.Model.Entity;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,32 +17,14 @@ namespace ApiServer.Controllers
     [ApiController]
     public class MPUserController : ControllerBase
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("wexin-login1")]
-        public async Task<IActionResult> wexin_login1([FromBody] object obj)
+        public readonly IBaseService<mp_user> _baseService;
+
+        public MPUserController(IBaseService<mp_user> baseService)
         {
-            var dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(JsonConvert.SerializeObject(obj));
-            var code = dict["code"];
-            var token = "";
-            return Ok(await Task.FromResult(token));
+            _baseService = baseService;
         }
 
-        /// <summary>
-        /// 正规的小程序登录方式
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("wexin-login2")]
-        public async Task<IActionResult> wexin_login2()
-        {
-            return Ok(await Task.FromResult(""));
-        }
-
+        #region 小程序端接口
         /// <summary>
         /// 我的购物车商品集合
         /// </summary>
@@ -125,5 +112,46 @@ namespace ApiServer.Controllers
         {
             return Ok(await Task.FromResult(""));
         }
+
+        #endregion
+
+        #region PC端接口
+
+        /// <summary>
+        /// 查询小程序用户
+        /// </summary>
+        /// <param name="pairs"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("pc/mpuser/query")]
+        public async Task<IActionResult> GetMPUser([FromBody] Dictionary<string, string> pairs)
+        {
+            string nickname = pairs["nickname"];
+            int pageIndex = Convert.ToInt32(pairs["pageNum"]);
+            int pageSize = Convert.ToInt32(pairs["pageSize"]);
+            var where = PredicateBuilder.True<mp_user>();
+            if (!string.IsNullOrWhiteSpace(nickname))
+            {
+                where = where.And(a => a.nickName.Contains(nickname));
+            }
+            var result = _baseService.QueryByPage(pageIndex, pageSize, where, _ => _.id);
+            return Ok(await Task.FromResult(ResultModel.Success(result)));
+        }
+
+
+        /// <summary>
+        /// 用户管理：删除
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("pc/mpuser/delete")]
+        public async Task<IActionResult> Delete([FromForm] long userId)
+        {
+            var result = await _baseService.RemoveAsync(a => a.id == userId);
+            return Ok(await Task.FromResult(ResultModel.Result(result)));
+        }
+
+        #endregion
     }
 }

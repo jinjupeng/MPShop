@@ -166,7 +166,7 @@ namespace ApiServer.BLL.BLL
         /// </summary>
         /// <param name="roleId"></param>
         /// <param name="checkedIds"></param>
-        [Transaction]
+        //[Transaction]
         public MsgModel SaveCheckedKeys(long roleId, List<long> checkedIds)
         {
             // 保存之前先删除

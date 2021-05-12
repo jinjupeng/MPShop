@@ -137,6 +137,18 @@ namespace ApiServer.BLL.BLL
         }
 
         /// <summary>
+        /// 异步删除
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<bool> RemoveAsync(Expression<Func<T, bool>> express, CancellationToken cancellationToken = default)
+        {
+            var delModels = await _baseDal.SelectAsync(express);
+            return await _baseDal.RemoveAsync(delModels.FirstOrDefault());
+        }
+
+        /// <summary>
         /// 同步-新增
         /// </summary>
         /// <param name="entity"></param>

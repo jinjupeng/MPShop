@@ -49,6 +49,11 @@ const menuRouter = [
         path: 'personal',
         component: () => import('@/views/system/PersonalCenter.vue')
     },
+    {
+      name: 'mpuser',
+      path: 'mpuser',
+      component: () => import('@/views/miniprogram/mpuser.vue')
+  },
 ];
 
 export default [
