@@ -73,7 +73,7 @@ namespace ApiServer.BLL.BLL
 
         public MsgModel UpdateRole(sys_role sys_role)
         {
-            if (!_baseSysRoleService.UpdateRange(sys_role))
+            if (!_baseSysRoleService.Update(sys_role))
             {
                 return MsgModel.Fail("角色更新失败！");
             }
@@ -91,7 +91,7 @@ namespace ApiServer.BLL.BLL
 
                 return MsgModel.Fail(StatusCodes.Status500InternalServerError, "角色编码已存在，不能重复！");
             }
-            if (!_baseSysRoleService.AddRange(sys_role))
+            if (!_baseSysRoleService.Insert(sys_role))
             {
                 return MsgModel.Fail("新增角色失败！");
             }
@@ -145,7 +145,7 @@ namespace ApiServer.BLL.BLL
         {
             sys_role sys_role = _baseSysRoleService.GetModels(a => a.id == id).SingleOrDefault();
             sys_role.status = status;
-            bool result = _baseSysRoleService.UpdateRange(sys_role);
+            bool result = _baseSysRoleService.Update(sys_role);
 
             return result ? MsgModel.Success("角色禁用状态更新成功！") : MsgModel.Fail("角色禁用状态更新失败！");
         }

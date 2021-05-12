@@ -61,7 +61,7 @@ namespace ApiServer.BLL.BLL
 
         public MsgModel UpdateOrg(sys_org sys_org)
         {
-            if (!_baseSysOrgService.UpdateRange(sys_org))
+            if (!_baseSysOrgService.Update(sys_org))
             {
                 return MsgModel.Fail("更新组织机构失败！");
             }
@@ -78,10 +78,10 @@ namespace ApiServer.BLL.BLL
             sys_org parent = _baseSysOrgService.GetModels(a => a.id == sys_org.org_pid).SingleOrDefault();
             parent.id = sys_org.org_pid;
             parent.is_leaf = false; //更新父节点为非子节点。
-            _baseSysOrgService.UpdateRange(parent);
+            _baseSysOrgService.Update(parent);
 
             sys_org.status = false;//设置是否禁用，新增节点默认可用
-            _baseSysOrgService.AddRange(sys_org);
+            _baseSysOrgService.Add(sys_org);
             return MsgModel.Success("新增组织机构成功！");
         }
 
@@ -103,10 +103,10 @@ namespace ApiServer.BLL.BLL
                     id = sys_org.org_pid,
                     is_leaf = true// 更新父节点为叶子节点。
                 };
-                _baseSysOrgService.UpdateRange(parent);
+                _baseSysOrgService.Update(parent);
             }
             // 删除节点
-            _baseSysOrgService.DeleteRange(sys_org);
+            _baseSysOrgService.Remove(sys_org);
             return MsgModel.Success("删除组织机构成功！");
         }
 
@@ -139,7 +139,7 @@ namespace ApiServer.BLL.BLL
         {
             sys_org sys_org = _baseSysOrgService.GetModels(a => a.id == id).SingleOrDefault();
             sys_org.status = status;
-            bool result = _baseSysOrgService.UpdateRange(sys_org);
+            bool result = _baseSysOrgService.Update(sys_org);
 
             return result ? MsgModel.Success("更新组织机构状态成功！") : MsgModel.Fail("更新组织机构状态失败！");
         }

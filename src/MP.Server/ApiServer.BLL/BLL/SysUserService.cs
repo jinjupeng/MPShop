@@ -63,7 +63,7 @@ namespace ApiServer.BLL.BLL
         /// <param name="sys_user"></param>
         public MsgModel UpdateUser(sys_user sys_user)
         {
-            if (!_baseSysUserService.UpdateRange(sys_user))
+            if (!_baseSysUserService.Update(sys_user))
             {
                 return MsgModel.Fail(StatusCodes.Status500InternalServerError, "更新用户失败！");
             }
@@ -84,7 +84,7 @@ namespace ApiServer.BLL.BLL
             {
                 return MsgModel.Fail(StatusCodes.Status500InternalServerError, "用户名已存在，不能重复");
             }
-            if (!_baseSysUserService.AddRange(sys_user))
+            if (!_baseSysUserService.Insert(sys_user))
             {
                 return MsgModel.Fail("新增用户失败！");
             }
@@ -114,7 +114,7 @@ namespace ApiServer.BLL.BLL
             sys_user.id = userId;
             sys_user.password = PasswordEncoder.Encode(_sysConfigService.GetConfigItem("user.init.password"));
             var length = sys_user.password.Length;
-            bool result = _baseSysUserService.UpdateRange(sys_user);
+            bool result = _baseSysUserService.Update(sys_user);
             if (!result)
             {
                 return MsgModel.Fail(StatusCodes.Status500InternalServerError, "密码重置失败！");
@@ -152,7 +152,7 @@ namespace ApiServer.BLL.BLL
                 return MsgModel.Fail("原密码输入错误，请确认后重新输入！");
             }
             sys_user.password = PasswordEncoder.Encode(newPass);
-            var result = _baseSysUserService.UpdateRange(sys_user);
+            var result = _baseSysUserService.Update(sys_user);
             return result ? MsgModel.Success("密码修改成功！") : MsgModel.Fail("密码修改失败！");
         }
 
@@ -165,7 +165,7 @@ namespace ApiServer.BLL.BLL
         {
             sys_user sys_user = _baseSysUserService.GetModels(a => a.id == id).SingleOrDefault();
             sys_user.enabled = enabled;
-            bool result = _baseSysUserService.UpdateRange(sys_user);
+            bool result = _baseSysUserService.Update(sys_user);
 
             return result ? MsgModel.Success("用户状态更新成功！") : MsgModel.Fail("用户状态更新失败！");
 

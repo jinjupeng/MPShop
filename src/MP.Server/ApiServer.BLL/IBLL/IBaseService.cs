@@ -10,10 +10,10 @@ namespace ApiServer.BLL.IBLL
 {
     public interface IBaseService<T> where T : class
     {
-        bool AddRange(params T[] t);
+        Task<bool> AddRangeAsync(IEnumerable<T> t);
         bool DeleteRange(IEnumerable<T> t);
-        bool DeleteRange(params T[] t);
-        bool UpdateRange(params T[] t);
+        bool DeleteRange(Expression<Func<T, bool>> expression);
+        bool UpdateRange(IEnumerable<T> t);
 
         /// <summary>
         /// 根据whereLambda获取IQueryable集合
@@ -48,7 +48,9 @@ namespace ApiServer.BLL.IBLL
 
         T Add(T entity);
 
-        T Update(T entity);
+        bool Insert(T entity);
+
+        bool Update(T entity);
 
         bool Remove(T entity);
 

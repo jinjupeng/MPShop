@@ -73,7 +73,7 @@ namespace ApiServer.BLL.BLL
                 {
                     var sysUser = new sys_user();
                     sysUser = user.BuildAdapter().AdaptToType<sys_user>();
-                    _baseService.AddRange(sysUser);
+                    _baseService.Add(sysUser);
                     var playLoad = new Dictionary<string, object>
                     {
                         { ClaimAttributes.UserId, queryUser.id },

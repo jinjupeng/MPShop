@@ -10,31 +10,29 @@ namespace ApiServer.DAL.IDAL
 {
     public interface IBaseDal<T> where T : class
     {
-        void AddRange(IEnumerable<T> t);
-        void AddRange(params T[] t);
+        Task AddRangeAsync(IEnumerable<T> t);
         void DeleteRange(IEnumerable<T> t);
-        void DeleteRange(params T[] t);
+        void DeleteRange(Expression<Func<T, bool>> expression);
         void UpdateRange(IEnumerable<T> t);
-        void UpdateRange(params T[] t);
         IQueryable<T> ExecSql(string sql);
 
         IQueryable<T> GetModels(Expression<Func<T, bool>> whereLambda);
         IQueryable<T> QueryByPage<TKey>(int pageIndex, int pageSize, Expression<Func<T, bool>> whereLambda, Expression<Func<T, TKey>> orderBy);
 
-        bool SaveChangesAsync();
-
+        Task<bool> SaveChangesAsync();
+        bool SaveChanges();
         T Add(T entity);
 
         T Update(T entity);
 
-        bool Remove(T entity);
+        T Remove(T entity);
         ValueTask<EntityEntry<T>> InsertAsync(T entity);
 
         Task<T> AddAsync(T entity, CancellationToken cancellationToken = default);
 
         Task<T> UpdateAsync(T entity, CancellationToken cancellationToken = default);
 
-        Task<bool> RemoveAsync(T entity);
+        Task<T> RemoveAsync(T entity);
 
         Task<bool> IsExistAsync(Expression<Func<T, bool>> whereLambda);
 

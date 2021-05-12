@@ -22,27 +22,23 @@ namespace ApiServer.DAL.DAL
         {
             this._context = context;
         }
-        public void AddRange(IEnumerable<T> t)
+
+        public async Task AddRangeAsync(IEnumerable<T> t)
         {
-            _context.AddRangeAsync(t);
+            await _context.AddRangeAsync(t);
         }
-        public void AddRange(params T[] t)
-        {
-            _context.AddRangeAsync(t);
-        }
+
         public void DeleteRange(IEnumerable<T> t)
         {
             _context.RemoveRange(t);
         }
-        public void DeleteRange(params T[] t)
+
+        public void DeleteRange(Expression<Func<T, bool>> expression)
         {
-            _context.RemoveRange(t);
+            _context.RemoveRange(GetModels(expression));
         }
+
         public void UpdateRange(IEnumerable<T> t)
-        {
-            _context.UpdateRange(t);
-        }
-        public void UpdateRange(params T[] t)
         {
             _context.UpdateRange(t);
         }
@@ -63,9 +59,14 @@ namespace ApiServer.DAL.DAL
             return _context.Set<T>().Where(whereLambda.Compile()).AsQueryable().OrderBy(orderBy).Skip((pageIndex - 1) * pageSize).Take(pageSize);
         }
 
-        public bool SaveChangesAsync()
+        public async Task<bool> SaveChangesAsync()
         {
-            return _context.SaveChangesAsync().Result > 0;
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public bool SaveChanges()
+        {
+            return _context.SaveChanges() > 0;
         }
 
         public async ValueTask<EntityEntry<T>> InsertAsync(T entity)
@@ -128,7 +129,7 @@ namespace ApiServer.DAL.DAL
             return Task.FromResult(Update(entity));
         }
 
-        public Task<bool> RemoveAsync(T entity)
+        public Task<T> RemoveAsync(T entity)
         {
             return Task.FromResult(Remove(entity));
         }
@@ -143,10 +144,9 @@ namespace ApiServer.DAL.DAL
             return _context.Set<T>().Update(entity).Entity;
         }
 
-        public bool Remove(T entity)
+        public T Remove(T entity)
         {
-            _context.Set<T>().Remove(entity);
-            return true;
+            return _context.Set<T>().Remove(entity).Entity;
         }
     }
 }

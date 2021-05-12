@@ -23,28 +23,28 @@ namespace ApiServer.BLL.BLL
             this.unitOfWork = unitOfWork;
         }
 
-        public bool AddRange(params T[] t)
+        public async Task<bool> AddRangeAsync(IEnumerable<T> t)
         {
-            _baseDal.AddRange(t);
-            return _baseDal.SaveChangesAsync();
+            await _baseDal.AddRangeAsync(t);
+            return await _baseDal.SaveChangesAsync();
         }
 
         public bool DeleteRange(IEnumerable<T> t)
         {
             _baseDal.DeleteRange(t);
-            return _baseDal.SaveChangesAsync();
+            return _baseDal.SaveChanges();
         }
 
-        public bool DeleteRange(params T[] t)
+        public bool DeleteRange(Expression<Func<T, bool>> expression)
         {
-            _baseDal.DeleteRange(t);
-            return _baseDal.SaveChangesAsync();
+            _baseDal.DeleteRange(expression);
+            return _baseDal.SaveChanges();
         }
 
-        public bool UpdateRange(params T[] t)
+        public bool UpdateRange(IEnumerable<T> t)
         {
             _baseDal.UpdateRange(t);
-            return _baseDal.SaveChangesAsync();
+            return _baseDal.SaveChanges();
         }
 
         public IQueryable<T> GetModels(Expression<Func<T, bool>> whereLambda)
@@ -111,7 +111,9 @@ namespace ApiServer.BLL.BLL
         /// <returns></returns>
         public async Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
         {
-            return await _baseDal.AddAsync(entity);
+            var result = await _baseDal.AddAsync(entity);
+            await _baseDal.SaveChangesAsync();
+            return result;
         }
 
         /// <summary>
@@ -122,7 +124,9 @@ namespace ApiServer.BLL.BLL
         /// <returns></returns>
         public async Task<T> UpdateAsync(T entity, CancellationToken cancellationToken = default)
         {
-            return await _baseDal.UpdateAsync(entity);
+            var result = await _baseDal.UpdateAsync(entity);
+            await _baseDal.SaveChangesAsync();
+            return result;
         }
 
         /// <summary>
@@ -133,7 +137,8 @@ namespace ApiServer.BLL.BLL
         /// <returns></returns>
         public async Task<bool> RemoveAsync(T entity, CancellationToken cancellationToken = default)
         {
-            return await _baseDal.RemoveAsync(entity);
+            await _baseDal.RemoveAsync(entity);
+            return await _baseDal.SaveChangesAsync();
         }
 
         /// <summary>
@@ -145,7 +150,8 @@ namespace ApiServer.BLL.BLL
         public async Task<bool> RemoveAsync(Expression<Func<T, bool>> express, CancellationToken cancellationToken = default)
         {
             var delModels = await _baseDal.SelectAsync(express);
-            return await _baseDal.RemoveAsync(delModels.FirstOrDefault());
+            _baseDal.DeleteRange(delModels);
+            return  _baseDal.SaveChanges();
         }
 
         /// <summary>
@@ -155,7 +161,15 @@ namespace ApiServer.BLL.BLL
         /// <returns></returns>
         public T Add(T entity)
         {
-            return _baseDal.Add(entity);
+            var result = _baseDal.Add(entity);
+            _baseDal.SaveChanges();
+            return result;
+        }
+
+        public bool Insert(T entity)
+        {
+            _baseDal.Add(entity);
+            return _baseDal.SaveChanges();
         }
 
         /// <summary>
@@ -163,9 +177,10 @@ namespace ApiServer.BLL.BLL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public T Update(T entity)
+        public bool Update(T entity)
         {
-            return _baseDal.Update(entity);
+            _baseDal.Update(entity);
+            return _baseDal.SaveChanges();
         }
 
         /// <summary>
@@ -175,7 +190,8 @@ namespace ApiServer.BLL.BLL
         /// <returns></returns>
         public bool Remove(T entity)
         {
-            return _baseDal.Remove(entity);
+            _baseDal.Remove(entity);
+            return _baseDal.SaveChanges();
         }
     }
 }

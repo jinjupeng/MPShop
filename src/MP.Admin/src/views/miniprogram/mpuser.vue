@@ -183,7 +183,7 @@ export default {
       });
     },
     deleteData(row) {
-      this.$confirm("确定删除[" + row.nickname + "]?").then((_) => {
+      this.$confirm("确定删除[" + row.nickName + "]?").then((_) => {
         deleteUser(row.id)
           .then((res) => {
             this.submitQueryForm(); //删除之后，重新查询table

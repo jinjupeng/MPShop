@@ -46,14 +46,14 @@ namespace ApiServer.BLL.BLL
 
         public MsgModel UpdateConfig(sys_config sys_Config)
         {
-            var result = _baseSysConfigService.UpdateRange(sys_Config);
+            var result = _baseSysConfigService.Update(sys_Config);
             return result ? MsgModel.Success("更新配置成功！") : MsgModel.Fail("更新配置失败！");
         }
 
         public MsgModel AddConfig(sys_config sys_Config)
         {
             sys_Config.id = new Snowflake().GetId();
-            var result = _baseSysConfigService.AddRange(sys_Config);
+            var result = _baseSysConfigService.Insert(sys_Config);
             return result ? MsgModel.Success("新增配置成功！") : MsgModel.Fail("新增配置失败！");
         }
 

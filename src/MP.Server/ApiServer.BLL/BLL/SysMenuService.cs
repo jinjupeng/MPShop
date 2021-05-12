@@ -74,7 +74,7 @@ namespace ApiServer.BLL.BLL
 
         public MsgModel UpdateMenu(sys_menu sys_menu)
         {
-            _baseSysMenuService.UpdateRange(sys_menu);
+            _baseSysMenuService.Update(sys_menu);
             return MsgModel.Success("更新菜单项成功！");
         }
 
@@ -88,10 +88,10 @@ namespace ApiServer.BLL.BLL
             sys_menu parent = _baseSysMenuService.GetModels(a => a.id == sys_menu.menu_pid).SingleOrDefault();
             parent.id = sys_menu.menu_pid;
             parent.is_leaf = false; //更新父节点为非子节点。
-            _baseSysMenuService.UpdateRange(parent);
+            _baseSysMenuService.Update(parent);
 
             sys_menu.status = false;//设置是否禁用，新增节点默认可用
-            _baseSysMenuService.AddRange(sys_menu);
+            _baseSysMenuService.Update(sys_menu);
             return MsgModel.Success("新增菜单项成功！");
         }
 
@@ -115,10 +115,10 @@ namespace ApiServer.BLL.BLL
                 sys_menu parent = _baseSysMenuService.GetModels(a => a.id == sys_menu.menu_pid).SingleOrDefault();
                 parent.id = sys_menu.menu_pid;
                 parent.is_leaf = true;//更新父节点为叶子节点。
-                _baseSysMenuService.UpdateRange(parent);
+                _baseSysMenuService.Update(parent);
             }
             // 删除节点
-            _baseSysMenuService.DeleteRange(sys_menu);
+            _baseSysMenuService.Remove(sys_menu);
             return MsgModel.Success("删除菜单项成功！");
         }
 
@@ -215,7 +215,7 @@ namespace ApiServer.BLL.BLL
             sys_menu sys_menu = _baseSysMenuService.GetModels(a => a.id == id).SingleOrDefault();
             sys_menu.id = id;
             sys_menu.status = status;
-            var result = _baseSysMenuService.UpdateRange(sys_menu);
+            var result = _baseSysMenuService.Update(sys_menu);
             return result ? MsgModel.Success("菜单禁用状态更新成功！") : MsgModel.Fail("菜单禁用状态更新失败！");
         }
 

@@ -97,7 +97,7 @@ namespace ApiServer.BLL.BLL
 
         public MsgModel UpdateApi(sys_api sys_Api)
         {
-            var result = _baseService.UpdateRange(sys_Api);
+            var result = _baseService.Update(sys_Api);
             return result ? MsgModel.Success("修改接口配置成功！") : MsgModel.Fail("修改接口配置失败！");
         }
 
@@ -117,9 +117,9 @@ namespace ApiServer.BLL.BLL
                 id = sys_Api.api_pid,
                 is_leaf = false//更新父节点为非子节点。
             };
-            _baseService.UpdateRange(parent);
+            _baseService.Update(parent);
             sys_Api.status = false;//设置是否禁用，新增节点默认可用
-            _baseService.AddRange(sys_Api);
+            _baseService.Add(sys_Api);
             return msg;
         }
 
@@ -142,10 +142,10 @@ namespace ApiServer.BLL.BLL
                     id = sys_Api.api_pid,
                     is_leaf = true // //更新父节点为叶子节点。
                 };
-                _baseService.UpdateRange(parent);
+                _baseService.Update(parent);
             }
             // 删除节点
-            _baseService.DeleteRange(sys_Api);
+            _baseService.Remove(sys_Api);
             return MsgModel.Success("删除接口配置成功！");
         }
 
@@ -212,7 +212,7 @@ namespace ApiServer.BLL.BLL
         {
             sys_api sys_Api = _baseService.GetModels(a => a.id == id).SingleOrDefault();
             sys_Api.status = status;
-            bool result = _baseService.UpdateRange(sys_Api);
+            bool result = _baseService.Update(sys_Api);
 
             return MsgModel.Success(result ? "接口禁用状态更新成功！" : "接口禁用状态更新失败！");
         }

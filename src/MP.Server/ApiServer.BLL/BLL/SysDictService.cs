@@ -59,7 +59,7 @@ namespace ApiServer.BLL.BLL
         /// <param name="sys_Dict"></param>
         public MsgModel Update(sys_dict sys_Dict)
         {
-            var result = _baseSysDictService.UpdateRange(sys_Dict);
+            var result = _baseSysDictService.Update(sys_Dict);
             return result ? MsgModel.Success("更新数据字典项成功！") : MsgModel.Fail("更新数据字典项失败！");
         }
 
@@ -70,7 +70,7 @@ namespace ApiServer.BLL.BLL
         public MsgModel Add(sys_dict sys_Dict)
         {
             sys_Dict.id = new Snowflake().GetId();
-            var result = _baseSysDictService.AddRange(sys_Dict);
+            var result = _baseSysDictService.Insert(sys_Dict);
             return result ? MsgModel.Success("新增数据字典项成功！") : MsgModel.Fail("新增数据字典项失败！");
         }
 
