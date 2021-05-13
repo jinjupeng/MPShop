@@ -5,7 +5,7 @@ namespace ApiServer.BLL.IBLL
 {
     public interface ISysOrgService
     {
-        MsgModel GetOrgTreeById(long rootOrgId, string orgNameLike, bool? orgStatus);
+        MsgModel GetOrgTreeById(int rootOrgId, string orgNameLike, bool? orgStatus);
 
         MsgModel UpdateOrg(sys_org sys_org);
 
@@ -13,7 +13,7 @@ namespace ApiServer.BLL.IBLL
 
         MsgModel DeleteOrg(sys_org sys_org);
 
-        MsgModel UpdateStatus(long id, bool status);
+        MsgModel UpdateStatus(int id, bool status);
     }
 
 }

@@ -9,8 +9,8 @@ namespace ApiServer.Model.Entity
 {
     public partial class sys_api
     {
-        public long id { get; set; }
-        public long api_pid { get; set; }
+        public int id { get; set; }
+        public int api_pid { get; set; }
         public string api_pids { get; set; }
         public bool is_leaf { get; set; }
         public string api_name { get; set; }

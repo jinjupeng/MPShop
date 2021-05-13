@@ -1,4 +1,5 @@
 ﻿using ApiServer.BLL.IBLL;
+using ApiServer.Common.Attributes;
 using ApiServer.Common.Auth;
 using ApiServer.Common.Encrypt;
 using ApiServer.Common.Utils;
@@ -42,6 +43,7 @@ namespace ApiServer.Extensions.Handlers
         /// </summary>
         /// <param name="context">保存小程序用户登录信息</param>
         /// <returns></returns>
+        [Transaction]
         public async Task<bool> ExcuteAsync(MiniProgramLoginContext context)
         {
             try
@@ -58,7 +60,11 @@ namespace ApiServer.Extensions.Handlers
                 if (mpUserModel != default) // 如果登录用户存在
                 {
                     mpUserModel.updatedAt = DateTime.Now;
-                    var updateResult = await _baseService.UpdateAsync(mpUserModel);
+                    await _baseService.UpdateAsync(mpUserModel);
+                    var sessionKeyModel = await _sessionKeyService.GetEntityAsync(a => a.uid == mpUserModel.id);
+                    sessionKeyModel.sessionKey = session_key;
+                    sessionKeyModel.updatedAt = DateTime.Now;
+                    await _sessionKeyService.UpdateAsync(sessionKeyModel);
                     // 生成jwt，返回给小程序端
                     var claims = new List<Claim>
                     {
@@ -70,7 +76,7 @@ namespace ApiServer.Extensions.Handlers
                     };
 
                     var accessToken = IssueJwt(claims);
-                    var userInfo = MapUtils.ObjectToMap(updateResult);
+                    var userInfo = MapUtils.ObjectToMap(mpUserModel);
                     userInfo.Add("authorizationToken", accessToken);
                     this.httpResponse.ContentType = "application/json";
                     this.httpResponse.StatusCode = 200;
@@ -87,6 +93,13 @@ namespace ApiServer.Extensions.Handlers
                     // 将session_key保存到缓存中或token中或数据库中
                     mpUser.createdAt = DateTime.Now;
                     var insertResult = await _baseService.AddAsync(mpUser);
+                    var sessionKeyModel = new session_key
+                    {
+                        uid = insertResult.id,
+                        createdAt = DateTime.Now,
+                        sessionKey = session_key
+                    };
+                    await _sessionKeyService.InsertAsync(sessionKeyModel);
                     var sessionKey = new session_key
                     {
                         uid = mpUser.id,

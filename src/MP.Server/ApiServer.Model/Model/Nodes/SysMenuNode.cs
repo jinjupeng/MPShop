@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ApiServer.Model.Model.Nodes
 {
-    public class SysMenuNode : SysMenu, IDataTree<SysMenuNode, long>
+    public class SysMenuNode : SysMenu, IDataTree<SysMenuNode, int>
     {
         public List<SysMenuNode> Children { get; set; }
 
@@ -12,12 +12,12 @@ namespace ApiServer.Model.Model.Nodes
 
         public string name { get => menuName; }
 
-        public long GetId()
+        public int GetId()
         {
             return id;
         }
 
-        public long GetParentId()
+        public int GetParentId()
         {
             return menuPid;
         }

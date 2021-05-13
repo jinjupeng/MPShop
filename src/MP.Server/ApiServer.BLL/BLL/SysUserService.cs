@@ -51,7 +51,7 @@ namespace ApiServer.BLL.BLL
         /// <param name="pageNum"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public MsgModel QueryUser(long? orgId, string userName, string phone, string email, bool? enabled, DateTime? createStartTime, DateTime? createEndTime, int pageNum, int pageSize)
+        public MsgModel QueryUser(int? orgId, string userName, string phone, string email, bool? enabled, DateTime? createStartTime, DateTime? createEndTime, int pageNum, int pageSize)
         {
             return _mySystemService.SelectUser(pageNum, pageSize, orgId, userName, phone, email, enabled, createStartTime, createEndTime);
         }
@@ -76,7 +76,6 @@ namespace ApiServer.BLL.BLL
         /// <param name="sys_user"></param>
         public MsgModel AddUser(sys_user sys_user)
         {
-            sys_user.id = new Snowflake().GetId();
             sys_user.password = PasswordEncoder.Encode(_sysConfigService.GetConfigItem("user.init.password"));
             sys_user.create_time = DateTime.Now; //创建时间
             sys_user.enabled = true;//新增用户激活
@@ -95,7 +94,7 @@ namespace ApiServer.BLL.BLL
         /// 用户管理：删除
         /// </summary>
         /// <param name="userId"></param>
-        public MsgModel DeleteUser(long userId)
+        public MsgModel DeleteUser(int userId)
         {
             if (!_baseSysUserService.DeleteRange(_baseSysUserService.GetModels(a => a.id == userId)))
             {
@@ -108,7 +107,7 @@ namespace ApiServer.BLL.BLL
         /// 用户管理：重置密码
         /// </summary>
         /// <param name="userId"></param>
-        public MsgModel PwdReset(long userId)
+        public MsgModel PwdReset(int userId)
         {
             sys_user sys_user = _baseSysUserService.GetModels(a => a.id == userId).ToList().SingleOrDefault();
             sys_user.id = userId;
@@ -161,7 +160,7 @@ namespace ApiServer.BLL.BLL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="enabled"></param>
-        public MsgModel UpdateEnabled(long id, bool enabled)
+        public MsgModel UpdateEnabled(int id, bool enabled)
         {
             sys_user sys_user = _baseSysUserService.GetModels(a => a.id == id).SingleOrDefault();
             sys_user.enabled = enabled;

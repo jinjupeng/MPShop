@@ -14,9 +14,9 @@ namespace ApiServer.DAL.IDAL
 
         IQueryable<sys_api> SelectApiTree(long rootApiId, string apiNameLike, bool apiStatus);
 
-        int InsertRoleMenuIds(long roleId, List<long> checkedIds);
+        int InsertRoleMenuIds(int roleId, List<int> checkedIds);
 
-        int InsertRoleApiIds(long roleId, List<long> checkedIds);
+        int InsertRoleApiIds(int roleId, List<int> checkedIds);
 
         IQueryable<string> SelectApiExpandedKeys();
 
@@ -28,7 +28,7 @@ namespace ApiServer.DAL.IDAL
 
         IQueryable<string> GetCheckedRoleIds(long userId);
 
-        int InsertUserRoleIds(long userId, List<long> checkedIds);
+        int InsertUserRoleIds(int userId, List<int> checkedIds);
 
         IQueryable<sys_menu> SelectMenuByUserName(string userName);
 

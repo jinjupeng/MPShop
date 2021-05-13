@@ -9,8 +9,8 @@ namespace ApiServer.Model.Entity
 {
     public partial class sys_role_menu
     {
-        public long id { get; set; }
-        public long role_id { get; set; }
-        public long menu_id { get; set; }
+        public int id { get; set; }
+        public int role_id { get; set; }
+        public int menu_id { get; set; }
     }
 }

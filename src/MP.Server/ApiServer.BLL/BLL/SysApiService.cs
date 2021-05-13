@@ -72,7 +72,7 @@ namespace ApiServer.BLL.BLL
             sys_api rootSysApi = _baseService.GetModels(s => s.level == 1).Single();
             if (rootSysApi != null)
             {
-                long rootApiId = rootSysApi.id;
+                int rootApiId = rootSysApi.id;
                 List<sys_api> sysApis = _mySystemService.SelectApiTree(rootApiId, apiNameLike, apiStatus);
                 List<SysApiNode> sysApiNodes = new List<SysApiNode>();
                 foreach (sys_api sys_Api in sysApis)
@@ -109,7 +109,6 @@ namespace ApiServer.BLL.BLL
                 isok = true,
                 message = "新增接口配置成功！"
             };
-            sys_Api.id = new Snowflake().GetId();
             SetApiIdsAndLevel(sys_Api);
             sys_Api.is_leaf = true;//新增的菜单节点都是子节点，没有下级
             sys_api parent = new sys_api
@@ -174,7 +173,7 @@ namespace ApiServer.BLL.BLL
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
-        public List<string> GetCheckedKeys(long roleId)
+        public List<string> GetCheckedKeys(int roleId)
         {
             return _mySystemService.SelectApiCheckedKeys(roleId);
         }
@@ -194,7 +193,7 @@ namespace ApiServer.BLL.BLL
         /// <param name="roleId"></param>
         /// <param name="checkedIds"></param>
         [Transaction]
-        public MsgModel SaveCheckedKeys(long roleId, List<long> checkedIds)
+        public MsgModel SaveCheckedKeys(int roleId, List<int> checkedIds)
         {
             // 保存之前先删除
             var sysRoleApiList = _baseSysRoleApiService.GetModels(a => a.role_id == roleId);
@@ -208,7 +207,7 @@ namespace ApiServer.BLL.BLL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="status"></param>
-        public MsgModel UpdateStatus(long id, bool status)
+        public MsgModel UpdateStatus(int id, bool status)
         {
             sys_api sys_Api = _baseService.GetModels(a => a.id == id).SingleOrDefault();
             sys_Api.status = status;

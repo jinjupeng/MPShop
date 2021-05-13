@@ -382,9 +382,7 @@ namespace ApiServer.Model.Entity
             {
                 entity.HasComment("系统Http接口表，配合sys_role_api控制接口访问权限");
 
-                entity.Property(e => e.id)
-                    .HasColumnType("bigint(20)")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.id).HasColumnType("int(11)");
 
                 entity.Property(e => e.api_name)
                     .IsRequired()
@@ -394,7 +392,7 @@ namespace ApiServer.Model.Entity
                     .HasCollation("utf8_general_ci");
 
                 entity.Property(e => e.api_pid)
-                    .HasColumnType("bigint(20)")
+                    .HasColumnType("int(11)")
                     .HasComment("接口父ID(即接口分组)");
 
                 entity.Property(e => e.api_pids)
@@ -431,9 +429,7 @@ namespace ApiServer.Model.Entity
                     .HasName("param_key")
                     .IsUnique();
 
-                entity.Property(e => e.id)
-                    .HasColumnType("bigint(20)")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.id).HasColumnType("int(11)");
 
                 entity.Property(e => e.create_time)
                     .HasColumnType("datetime")
@@ -473,9 +469,7 @@ namespace ApiServer.Model.Entity
             {
                 entity.HasComment("数据字典表");
 
-                entity.Property(e => e.id)
-                    .HasColumnType("bigint(20)")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.id).HasColumnType("int(11)");
 
                 entity.Property(e => e.create_time)
                     .HasColumnType("datetime")
@@ -522,9 +516,7 @@ namespace ApiServer.Model.Entity
             {
                 entity.HasComment("系统菜单表");
 
-                entity.Property(e => e.id)
-                    .HasColumnType("bigint(20)")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.id).HasColumnType("int(11)");
 
                 entity.Property(e => e.icon)
                     .HasColumnType("varchar(45)")
@@ -545,7 +537,7 @@ namespace ApiServer.Model.Entity
                     .HasCollation("utf8_general_ci");
 
                 entity.Property(e => e.menu_pid)
-                    .HasColumnType("bigint(20)")
+                    .HasColumnType("int(11)")
                     .HasComment("父菜单ID");
 
                 entity.Property(e => e.menu_pids)
@@ -572,9 +564,7 @@ namespace ApiServer.Model.Entity
             {
                 entity.HasComment("系统组织结构表");
 
-                entity.Property(e => e.id)
-                    .HasColumnType("bigint(20)")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.id).HasColumnType("int(11)");
 
                 entity.Property(e => e.address)
                     .HasColumnType("varchar(64)")
@@ -602,7 +592,7 @@ namespace ApiServer.Model.Entity
                     .HasCollation("utf8_general_ci");
 
                 entity.Property(e => e.org_pid)
-                    .HasColumnType("bigint(20)")
+                    .HasColumnType("int(11)")
                     .HasComment("上级组织编码");
 
                 entity.Property(e => e.org_pids)
@@ -629,9 +619,7 @@ namespace ApiServer.Model.Entity
             {
                 entity.HasComment("系统角色表");
 
-                entity.Property(e => e.id)
-                    .HasColumnType("bigint(20)")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.id).HasColumnType("int(11)");
 
                 entity.Property(e => e.role_code)
                     .IsRequired()
@@ -670,9 +658,7 @@ namespace ApiServer.Model.Entity
             {
                 entity.HasComment("角色接口权限关系表");
 
-                entity.Property(e => e.id)
-                    .HasColumnType("bigint(20)")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.id).HasColumnType("bigint(20)");
 
                 entity.Property(e => e.api_id)
                     .HasColumnType("bigint(20)")
@@ -687,16 +673,14 @@ namespace ApiServer.Model.Entity
             {
                 entity.HasComment("角色菜单权限关系表");
 
-                entity.Property(e => e.id)
-                    .HasColumnType("bigint(20)")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.id).HasColumnType("int(11)");
 
                 entity.Property(e => e.menu_id)
-                    .HasColumnType("bigint(20)")
+                    .HasColumnType("int(11)")
                     .HasComment("权限id");
 
                 entity.Property(e => e.role_id)
-                    .HasColumnType("bigint(20)")
+                    .HasColumnType("int(11)")
                     .HasComment("角色id");
             });
 
@@ -708,9 +692,7 @@ namespace ApiServer.Model.Entity
                     .HasName("username")
                     .IsUnique();
 
-                entity.Property(e => e.id)
-                    .HasColumnType("bigint(20)")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.id).HasColumnType("int(11)");
 
                 entity.Property(e => e.create_time)
                     .HasColumnType("datetime")
@@ -736,7 +718,7 @@ namespace ApiServer.Model.Entity
                     .HasCollation("utf8_general_ci");
 
                 entity.Property(e => e.org_id)
-                    .HasColumnType("bigint(20)")
+                    .HasColumnType("int(11)")
                     .HasComment("组织id");
 
                 entity.Property(e => e.password)
@@ -772,16 +754,14 @@ namespace ApiServer.Model.Entity
             {
                 entity.HasComment("用户角色关系表");
 
-                entity.Property(e => e.id)
-                    .HasColumnType("bigint(20)")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.id).HasColumnType("int(11)");
 
                 entity.Property(e => e.role_id)
-                    .HasColumnType("bigint(20)")
+                    .HasColumnType("int(11)")
                     .HasComment("角色自增id");
 
                 entity.Property(e => e.user_id)
-                    .HasColumnType("bigint(20)")
+                    .HasColumnType("int(11)")
                     .HasComment("用户自增id");
             });
 

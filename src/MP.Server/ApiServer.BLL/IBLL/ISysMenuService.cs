@@ -10,10 +10,10 @@ namespace ApiServer.BLL.IBLL
         MsgModel UpdateMenu(sys_menu sys_menu);
         MsgModel AddMenu(sys_menu sys_menu);
         MsgModel DeleteMenu(sys_menu sys_menu);
-        List<string> GetCheckedKeys(long roleId);
+        List<string> GetCheckedKeys(int roleId);
         List<string> GetExpandedKeys();
-        MsgModel SaveCheckedKeys(long roleId, List<long> checkedIds);
+        MsgModel SaveCheckedKeys(int roleId, List<int> checkedIds);
         MsgModel GetMenuTreeByUsername(string username);
-        MsgModel UpdateStatus(long id, bool status);
+        MsgModel UpdateStatus(int id, bool status);
     }
 }

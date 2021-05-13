@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 80013
  Source Host           : localhost:3306
- Source Schema         : apiserver
+ Source Schema         : mpshop
 
  Target Server Type    : MySQL
  Target Server Version : 80013
  File Encoding         : 65001
 
- Date: 08/04/2021 21:04:00
+ Date: 13/05/2021 22:53:16
 */
 
 SET NAMES utf8mb4;
@@ -6001,7 +6001,7 @@ INSERT INTO `goods_sku` VALUES (3005, 72, '[878, 879]', 5624, 55, '2020-09-13 09
 INSERT INTO `goods_sku` VALUES (3006, 72, '[878, 880]', 707, 68, '2020-09-13 09:57:13', '2020-09-13 09:57:13', '');
 INSERT INTO `goods_sku` VALUES (3007, 73, '[881, 884]', 1923, 90, '2020-09-13 09:57:13', '2020-09-13 09:57:13', '');
 INSERT INTO `goods_sku` VALUES (3008, 73, '[881, 885]', 9269, 91, '2020-09-13 09:57:13', '2020-09-13 09:57:13', '');
-INSERT INTO `goods_sku` VALUES (5000, 73, '[882, 884]', 7906, 19, '2020-09-13 09:57:13', '2020-09-13 09:57:13', '');
+INSERT INTO `goods_sku` VALUES (3009, 73, '[882, 884]', 7906, 19, '2020-09-13 09:57:13', '2020-09-13 09:57:13', '');
 INSERT INTO `goods_sku` VALUES (3010, 73, '[882, 885]', 5895, 35, '2020-09-13 09:57:13', '2020-09-13 09:57:13', '');
 INSERT INTO `goods_sku` VALUES (3011, 73, '[883, 884]', 9966, 90, '2020-09-13 09:57:13', '2020-09-13 09:57:13', '');
 INSERT INTO `goods_sku` VALUES (3012, 73, '[883, 885]', 5406, 96, '2020-09-13 09:57:13', '2020-09-13 09:57:13', '');
@@ -7541,7 +7541,7 @@ CREATE TABLE `mp_user`  (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mp_user
@@ -7629,8 +7629,8 @@ INSERT INTO `session_key` VALUES (8, 8, 'GyMzOqwI8zSJedU5BBGUmQ==', '2021-03-27 
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_api`;
 CREATE TABLE `sys_api`  (
-  `id` bigint(20) NOT NULL,
-  `api_pid` bigint(20) NOT NULL COMMENT '接口父ID(即接口分组)',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `api_pid` int(11) NOT NULL COMMENT '接口父ID(即接口分组)',
   `api_pids` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '当前接口的所有上级id(即所有上级分组)',
   `is_leaf` tinyint(1) NOT NULL COMMENT '0:不是叶子节点，1:是叶子节点',
   `api_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '接口名称',
@@ -7694,7 +7694,7 @@ INSERT INTO `sys_api` VALUES (44, 2, '[0],[1],[2]', 1, '数据字典数据删除
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_config`;
 CREATE TABLE `sys_config`  (
-  `id` bigint(20) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `param_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '参数名称(中文)',
   `param_key` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '参数编码唯一标识(英文及数字)',
   `param_value` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '参数值',
@@ -7714,7 +7714,7 @@ INSERT INTO `sys_config` VALUES (1, '用户初始密码', 'user.init.password', 
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict`;
 CREATE TABLE `sys_dict`  (
-  `id` bigint(20) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '分组名称',
   `group_code` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '分组编码',
   `item_name` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '字典项名称',
@@ -7737,8 +7737,8 @@ INSERT INTO `sys_dict` VALUES (4, '用户状态', 'sysuser.enabled', '已禁用'
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu`  (
-  `id` bigint(20) NOT NULL,
-  `menu_pid` bigint(20) NOT NULL COMMENT '父菜单ID',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_pid` int(11) NOT NULL COMMENT '父菜单ID',
   `menu_pids` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '当前菜单所有父菜单',
   `is_leaf` tinyint(1) NOT NULL COMMENT '0:不是叶子节点，1:是叶子节点',
   `menu_name` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '菜单名称',
@@ -7764,14 +7764,16 @@ INSERT INTO `sys_menu` VALUES (10, 1, '[0],[1]', 0, '测试用菜单', '/order',
 INSERT INTO `sys_menu` VALUES (11, 10, '[0],[1],[10]', 1, '子菜单(首页)', '/home/firstpage', 'el-icon-lock', 1, 3, 0);
 INSERT INTO `sys_menu` VALUES (12, 2, '[0],[1],[2]', 1, '参数配置', '/home/sysconfig', 'el-icon-fa fa-cog', 6, 3, 0);
 INSERT INTO `sys_menu` VALUES (13, 2, '[0],[1],[2]', 1, '数据字典', '/home/sysdict', 'el-icon-fa fa-list-ol', 7, 3, 0);
+INSERT INTO `sys_menu` VALUES (14, 1, '[0],[1]', 0, '小程序管理', '', '', 1, 2, 0);
+INSERT INTO `sys_menu` VALUES (15, 14, '[0],[1],[14]', 1, '微信用户管理', '/home/mpuser', '', 1, 3, 0);
 
 -- ----------------------------
 -- Table structure for sys_org
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_org`;
 CREATE TABLE `sys_org`  (
-  `id` bigint(20) NOT NULL,
-  `org_pid` bigint(20) NOT NULL COMMENT '上级组织编码',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `org_pid` int(11) NOT NULL COMMENT '上级组织编码',
   `org_pids` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '所有的父节点id',
   `is_leaf` tinyint(1) NOT NULL COMMENT '0:不是叶子节点，1:是叶子节点',
   `org_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '组织名',
@@ -7788,20 +7790,20 @@ CREATE TABLE `sys_org`  (
 -- Records of sys_org
 -- ----------------------------
 INSERT INTO `sys_org` VALUES (1, 0, '[0]', 0, 'DongTech', NULL, NULL, NULL, 1, 1, 0);
-INSERT INTO `sys_org` VALUES (1298067029349117953, 1, '[0],[1]', 0, '西安分公司', NULL, '13215678932', '11111111@qq.com', 1, 2, 0);
-INSERT INTO `sys_org` VALUES (1298067159791972353, 1298067029349117953, '[0],[1],[1298067029349117953]', 1, '测试部一', NULL, '', '11111111@qq.com', 1, 3, 0);
-INSERT INTO `sys_org` VALUES (1298067674592456706, 1, '[0],[1]', 0, '上海分公司', NULL, '', '11111111@qq.com', 2, 2, 0);
-INSERT INTO `sys_org` VALUES (1298067729978241025, 1298067674592456706, '[0],[1],[1298067674592456706]', 1, '运维部一', NULL, '', '11111111@qq.com', 1, 3, 0);
-INSERT INTO `sys_org` VALUES (1298067787712835585, 1298067674592456706, '[0],[1],[1298067674592456706]', 1, '运维部二', NULL, '', '11111111@qq.com', 2, 3, 0);
-INSERT INTO `sys_org` VALUES (1298067843731959809, 1298067674592456706, '[0],[1],[1298067674592456706]', 1, '运维部三', NULL, '', '11111111@qq.com', 3, 3, 0);
-INSERT INTO `sys_org` VALUES (1298068119314509825, 1298067029349117953, '[0],[1],[1298067029349117953]', 1, '研发部一', NULL, '', '11111111@qq.com', 2, 3, 0);
+INSERT INTO `sys_org` VALUES (2, 1, '[0],[1]', 0, '西安分公司', NULL, '13215678932', '11111111@qq.com', 1, 2, 0);
+INSERT INTO `sys_org` VALUES (3, 2, '[0],[1],[2]', 1, '测试部一', NULL, '', '11111111@qq.com', 1, 3, 0);
+INSERT INTO `sys_org` VALUES (4, 1, '[0],[1]', 0, '上海分公司', NULL, '', '11111111@qq.com', 2, 2, 0);
+INSERT INTO `sys_org` VALUES (5, 4, '[0],[1],[4]', 1, '运维部一', NULL, '', '11111111@qq.com', 1, 3, 0);
+INSERT INTO `sys_org` VALUES (6, 4, '[0],[1],[4]', 1, '运维部二', NULL, '', '11111111@qq.com', 2, 3, 0);
+INSERT INTO `sys_org` VALUES (7, 4, '[0],[1],[4]', 1, '运维部三', NULL, '', '11111111@qq.com', 3, 3, 0);
+INSERT INTO `sys_org` VALUES (8, 4, '[0],[1],[4]', 1, '研发部一', NULL, '', '11111111@qq.com', 2, 3, 0);
 
 -- ----------------------------
 -- Table structure for sys_role
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
-  `id` bigint(20) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '角色名称(汉字)',
   `role_desc` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '角色描述',
   `role_code` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '角色的英文code.如：ADMIN',
@@ -7813,156 +7815,162 @@ CREATE TABLE `sys_role`  (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES (1298061556168273921, '管理员', '系统管理员', 'admin', 1, 0);
-INSERT INTO `sys_role` VALUES (1298063367197437954, '普通用户', '普通用户', 'common', 2, 0);
+INSERT INTO `sys_role` VALUES (1, '管理员', '系统管理员', 'admin', 1, 0);
+INSERT INTO `sys_role` VALUES (2, '普通用户', '普通用户', 'common', 2, 0);
 
 -- ----------------------------
 -- Table structure for sys_role_api
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_api`;
 CREATE TABLE `sys_role_api`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `role_id` bigint(20) NOT NULL COMMENT '角色id',
-  `api_id` bigint(20) NOT NULL COMMENT '接口id'
+  `api_id` bigint(20) NOT NULL COMMENT '接口id',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色接口权限关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_api
 -- ----------------------------
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 1);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 2);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 3);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 4);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 5);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 6);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 7);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 33);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 8);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 9);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 10);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 11);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 12);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 13);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 14);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 15);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 16);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 17);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 18);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 19);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 20);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 21);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 22);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 23);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 24);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 25);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 26);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 27);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 28);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 29);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 30);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 31);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 32);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 34);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 35);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 36);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 37);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 38);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 39);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 40);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 41);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 42);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 43);
-INSERT INTO `sys_role_api` VALUES (1298061556168273921, 44);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 1);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 2);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 3);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 4);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 5);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 6);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 7);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 33);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 8);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 9);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 10);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 11);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 12);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 13);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 14);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 15);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 16);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 17);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 18);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 19);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 20);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 21);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 22);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 23);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 24);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 25);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 26);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 27);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 28);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 29);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 30);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 31);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 32);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 34);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 35);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 36);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 37);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 38);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 39);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 40);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 41);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 42);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 43);
-INSERT INTO `sys_role_api` VALUES (1298063367197437954, 44);
+INSERT INTO `sys_role_api` VALUES (1, 1, 1);
+INSERT INTO `sys_role_api` VALUES (2, 1, 2);
+INSERT INTO `sys_role_api` VALUES (3, 1, 3);
+INSERT INTO `sys_role_api` VALUES (4, 1, 4);
+INSERT INTO `sys_role_api` VALUES (5, 1, 5);
+INSERT INTO `sys_role_api` VALUES (6, 1, 6);
+INSERT INTO `sys_role_api` VALUES (7, 1, 7);
+INSERT INTO `sys_role_api` VALUES (8, 1, 33);
+INSERT INTO `sys_role_api` VALUES (9, 1, 8);
+INSERT INTO `sys_role_api` VALUES (10, 1, 9);
+INSERT INTO `sys_role_api` VALUES (11, 1, 10);
+INSERT INTO `sys_role_api` VALUES (12, 1, 11);
+INSERT INTO `sys_role_api` VALUES (13, 1, 12);
+INSERT INTO `sys_role_api` VALUES (14, 1, 13);
+INSERT INTO `sys_role_api` VALUES (15, 1, 14);
+INSERT INTO `sys_role_api` VALUES (16, 1, 15);
+INSERT INTO `sys_role_api` VALUES (17, 1, 16);
+INSERT INTO `sys_role_api` VALUES (18, 1, 17);
+INSERT INTO `sys_role_api` VALUES (19, 1, 18);
+INSERT INTO `sys_role_api` VALUES (20, 1, 19);
+INSERT INTO `sys_role_api` VALUES (21, 1, 20);
+INSERT INTO `sys_role_api` VALUES (22, 1, 21);
+INSERT INTO `sys_role_api` VALUES (23, 1, 22);
+INSERT INTO `sys_role_api` VALUES (24, 1, 23);
+INSERT INTO `sys_role_api` VALUES (25, 1, 24);
+INSERT INTO `sys_role_api` VALUES (26, 1, 25);
+INSERT INTO `sys_role_api` VALUES (27, 1, 26);
+INSERT INTO `sys_role_api` VALUES (28, 1, 27);
+INSERT INTO `sys_role_api` VALUES (29, 1, 28);
+INSERT INTO `sys_role_api` VALUES (30, 1, 29);
+INSERT INTO `sys_role_api` VALUES (31, 1, 30);
+INSERT INTO `sys_role_api` VALUES (32, 1, 31);
+INSERT INTO `sys_role_api` VALUES (33, 1, 32);
+INSERT INTO `sys_role_api` VALUES (34, 1, 34);
+INSERT INTO `sys_role_api` VALUES (35, 1, 35);
+INSERT INTO `sys_role_api` VALUES (36, 1, 36);
+INSERT INTO `sys_role_api` VALUES (37, 1, 37);
+INSERT INTO `sys_role_api` VALUES (38, 1, 38);
+INSERT INTO `sys_role_api` VALUES (39, 1, 39);
+INSERT INTO `sys_role_api` VALUES (40, 1, 40);
+INSERT INTO `sys_role_api` VALUES (41, 1, 41);
+INSERT INTO `sys_role_api` VALUES (42, 1, 42);
+INSERT INTO `sys_role_api` VALUES (43, 1, 43);
+INSERT INTO `sys_role_api` VALUES (44, 1, 44);
+INSERT INTO `sys_role_api` VALUES (45, 2, 1);
+INSERT INTO `sys_role_api` VALUES (46, 2, 2);
+INSERT INTO `sys_role_api` VALUES (47, 2, 3);
+INSERT INTO `sys_role_api` VALUES (48, 2, 4);
+INSERT INTO `sys_role_api` VALUES (49, 2, 5);
+INSERT INTO `sys_role_api` VALUES (50, 2, 6);
+INSERT INTO `sys_role_api` VALUES (52, 2, 7);
+INSERT INTO `sys_role_api` VALUES (53, 2, 8);
+INSERT INTO `sys_role_api` VALUES (54, 2, 9);
+INSERT INTO `sys_role_api` VALUES (55, 2, 10);
+INSERT INTO `sys_role_api` VALUES (56, 2, 11);
+INSERT INTO `sys_role_api` VALUES (57, 2, 12);
+INSERT INTO `sys_role_api` VALUES (58, 2, 13);
+INSERT INTO `sys_role_api` VALUES (59, 2, 14);
+INSERT INTO `sys_role_api` VALUES (60, 2, 15);
+INSERT INTO `sys_role_api` VALUES (61, 2, 16);
+INSERT INTO `sys_role_api` VALUES (62, 2, 17);
+INSERT INTO `sys_role_api` VALUES (63, 2, 18);
+INSERT INTO `sys_role_api` VALUES (64, 2, 19);
+INSERT INTO `sys_role_api` VALUES (65, 2, 20);
+INSERT INTO `sys_role_api` VALUES (66, 2, 21);
+INSERT INTO `sys_role_api` VALUES (67, 2, 22);
+INSERT INTO `sys_role_api` VALUES (68, 2, 23);
+INSERT INTO `sys_role_api` VALUES (69, 2, 24);
+INSERT INTO `sys_role_api` VALUES (70, 2, 25);
+INSERT INTO `sys_role_api` VALUES (71, 2, 26);
+INSERT INTO `sys_role_api` VALUES (72, 2, 27);
+INSERT INTO `sys_role_api` VALUES (73, 2, 28);
+INSERT INTO `sys_role_api` VALUES (74, 2, 29);
+INSERT INTO `sys_role_api` VALUES (75, 2, 30);
+INSERT INTO `sys_role_api` VALUES (76, 2, 31);
+INSERT INTO `sys_role_api` VALUES (77, 2, 32);
+INSERT INTO `sys_role_api` VALUES (78, 2, 34);
+INSERT INTO `sys_role_api` VALUES (79, 2, 35);
+INSERT INTO `sys_role_api` VALUES (80, 2, 36);
+INSERT INTO `sys_role_api` VALUES (81, 2, 37);
+INSERT INTO `sys_role_api` VALUES (82, 2, 38);
+INSERT INTO `sys_role_api` VALUES (83, 2, 39);
+INSERT INTO `sys_role_api` VALUES (84, 2, 40);
+INSERT INTO `sys_role_api` VALUES (85, 2, 41);
+INSERT INTO `sys_role_api` VALUES (86, 2, 42);
+INSERT INTO `sys_role_api` VALUES (87, 2, 43);
+INSERT INTO `sys_role_api` VALUES (88, 2, 44);
+INSERT INTO `sys_role_api` VALUES (89, 2, 33);
 
 -- ----------------------------
 -- Table structure for sys_role_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_menu`;
 CREATE TABLE `sys_role_menu`  (
-  `role_id` bigint(20) NOT NULL DEFAULT 0 COMMENT '角色id',
-  `menu_id` bigint(20) NOT NULL DEFAULT 0 COMMENT '权限id'
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL DEFAULT 0 COMMENT '角色id',
+  `menu_id` int(11) NOT NULL DEFAULT 0 COMMENT '权限id',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色菜单权限关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
-INSERT INTO `sys_role_menu` VALUES (1298063367197437954, 1);
-INSERT INTO `sys_role_menu` VALUES (1298063367197437954, 2);
-INSERT INTO `sys_role_menu` VALUES (1298063367197437954, 3);
-INSERT INTO `sys_role_menu` VALUES (1298063367197437954, 4);
-INSERT INTO `sys_role_menu` VALUES (1298063367197437954, 5);
-INSERT INTO `sys_role_menu` VALUES (1298063367197437954, 6);
-INSERT INTO `sys_role_menu` VALUES (1298063367197437954, 7);
-INSERT INTO `sys_role_menu` VALUES (1298063367197437954, 12);
-INSERT INTO `sys_role_menu` VALUES (1298063367197437954, 13);
-INSERT INTO `sys_role_menu` VALUES (1298063367197437954, 10);
-INSERT INTO `sys_role_menu` VALUES (1298063367197437954, 11);
-INSERT INTO `sys_role_menu` VALUES (1298061556168273921, 1);
-INSERT INTO `sys_role_menu` VALUES (1298061556168273921, 2);
-INSERT INTO `sys_role_menu` VALUES (1298061556168273921, 3);
-INSERT INTO `sys_role_menu` VALUES (1298061556168273921, 4);
-INSERT INTO `sys_role_menu` VALUES (1298061556168273921, 5);
-INSERT INTO `sys_role_menu` VALUES (1298061556168273921, 6);
-INSERT INTO `sys_role_menu` VALUES (1298061556168273921, 7);
-INSERT INTO `sys_role_menu` VALUES (1298061556168273921, 12);
-INSERT INTO `sys_role_menu` VALUES (1298061556168273921, 13);
-INSERT INTO `sys_role_menu` VALUES (1298061556168273921, 10);
-INSERT INTO `sys_role_menu` VALUES (1298061556168273921, 11);
+INSERT INTO `sys_role_menu` VALUES (1, 2, 1);
+INSERT INTO `sys_role_menu` VALUES (2, 2, 2);
+INSERT INTO `sys_role_menu` VALUES (3, 2, 3);
+INSERT INTO `sys_role_menu` VALUES (4, 2, 4);
+INSERT INTO `sys_role_menu` VALUES (5, 2, 5);
+INSERT INTO `sys_role_menu` VALUES (6, 2, 6);
+INSERT INTO `sys_role_menu` VALUES (7, 2, 7);
+INSERT INTO `sys_role_menu` VALUES (8, 2, 12);
+INSERT INTO `sys_role_menu` VALUES (9, 2, 13);
+INSERT INTO `sys_role_menu` VALUES (10, 2, 10);
+INSERT INTO `sys_role_menu` VALUES (11, 2, 11);
+INSERT INTO `sys_role_menu` VALUES (12, 1, 1);
+INSERT INTO `sys_role_menu` VALUES (13, 1, 14);
+INSERT INTO `sys_role_menu` VALUES (14, 1, 15);
+INSERT INTO `sys_role_menu` VALUES (15, 1, 2);
+INSERT INTO `sys_role_menu` VALUES (16, 1, 3);
+INSERT INTO `sys_role_menu` VALUES (17, 1, 4);
+INSERT INTO `sys_role_menu` VALUES (18, 1, 5);
+INSERT INTO `sys_role_menu` VALUES (19, 1, 6);
+INSERT INTO `sys_role_menu` VALUES (20, 1, 7);
+INSERT INTO `sys_role_menu` VALUES (21, 1, 12);
+INSERT INTO `sys_role_menu` VALUES (22, 1, 13);
+INSERT INTO `sys_role_menu` VALUES (23, 2, 10);
+INSERT INTO `sys_role_menu` VALUES (24, 2, 11);
 
 -- ----------------------------
 -- Table structure for sys_user
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`  (
-  `id` bigint(20) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '用户名',
   `password` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '密码',
   `nickname` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
   `portrait` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '头像图片路径',
-  `org_id` bigint(20) NOT NULL COMMENT '组织id',
+  `org_id` int(11) NOT NULL COMMENT '组织id',
   `enabled` bit(1) NOT NULL DEFAULT b'1' COMMENT '0无效用户，1是有效用户',
   `phone` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
   `email` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'email',
@@ -7974,20 +7982,22 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1297873308628307970, 'admin', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', NULL, NULL, 1, b'1', '13214456783', 'hahaha1@163.com', '2020-12-26 17:30:32');
+INSERT INTO `sys_user` VALUES (1, 'admin', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', NULL, NULL, 1, b'1', '13214456783', 'hahaha1@163.com', '2021-05-13 22:31:38');
 
 -- ----------------------------
 -- Table structure for sys_user_role
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role`  (
-  `role_id` bigint(20) NOT NULL DEFAULT 0 COMMENT '角色自增id',
-  `user_id` bigint(20) NOT NULL DEFAULT 0 COMMENT '用户自增id'
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL DEFAULT 0 COMMENT '角色自增id',
+  `user_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户自增id',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户角色关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
-INSERT INTO `sys_user_role` VALUES (1298061556168273921, 1297873308628307970);
+INSERT INTO `sys_user_role` VALUES (1, 1, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

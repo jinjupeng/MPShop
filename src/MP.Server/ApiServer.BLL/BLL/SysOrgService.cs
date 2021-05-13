@@ -30,7 +30,7 @@ namespace ApiServer.BLL.BLL
         /// <param name="orgNameLike">组织名称参数</param>
         /// <param name="orgStatus">组织状态参数</param>
         /// <returns>组织列表</returns>
-        public MsgModel GetOrgTreeById(long rootOrgId, string orgNameLike, bool? orgStatus)
+        public MsgModel GetOrgTreeById(int rootOrgId, string orgNameLike, bool? orgStatus)
         {
             MsgModel msg = new MsgModel()
             {
@@ -72,7 +72,6 @@ namespace ApiServer.BLL.BLL
         [Transaction]
         public MsgModel AddOrg(sys_org sys_org)
         {
-            sys_org.id = new Snowflake().GetId();
             SetOrgIdsAndLevel(sys_org);
             sys_org.is_leaf = true;//新增的组织节点都是子节点，没有下级
             sys_org parent = _baseSysOrgService.GetModels(a => a.id == sys_org.org_pid).SingleOrDefault();
@@ -135,7 +134,7 @@ namespace ApiServer.BLL.BLL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="status"></param>
-        public MsgModel UpdateStatus(long id, bool status)
+        public MsgModel UpdateStatus(int id, bool status)
         {
             sys_org sys_org = _baseSysOrgService.GetModels(a => a.id == id).SingleOrDefault();
             sys_org.status = status;

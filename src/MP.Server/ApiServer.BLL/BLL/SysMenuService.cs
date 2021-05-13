@@ -42,7 +42,7 @@ namespace ApiServer.BLL.BLL
             sys_menu rootSysMenu = _baseSysMenuService.GetModels(a => a.level == 1).SingleOrDefault();
             if (rootSysMenu != null)
             {
-                long rootMenuId = rootSysMenu.id;
+                int rootMenuId = rootSysMenu.id;
                 List<sys_menu> sysMenus = _mySystemService.SelectMenuTree(rootMenuId, menuNameLike, menuStatus);
                 List<SysMenuNode> sysMenuNodes = new List<SysMenuNode>();
                 foreach (sys_menu sys_menu in sysMenus)
@@ -59,7 +59,7 @@ namespace ApiServer.BLL.BLL
                 else
                 {
                     // 否则返回菜单的树型结构列表
-                    msg.data = DataTreeUtil<SysMenuNode, long>.BuildTree(sysMenuNodes, rootMenuId);
+                    msg.data = DataTreeUtil<SysMenuNode, int>.BuildTree(sysMenuNodes, rootMenuId);
                     return msg;
                 }
             }
@@ -81,7 +81,6 @@ namespace ApiServer.BLL.BLL
         [Transaction]
         public MsgModel AddMenu(sys_menu sys_menu)
         {
-            sys_menu.id = new Snowflake().GetId();
             SetMenuIdsAndLevel(sys_menu);
             sys_menu.is_leaf = true;//新增的菜单节点都是子节点，没有下级
 
@@ -147,7 +146,7 @@ namespace ApiServer.BLL.BLL
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
-        public List<string> GetCheckedKeys(long roleId)
+        public List<string> GetCheckedKeys(int roleId)
         {
             return _mySystemService.SelectMenuCheckedKeys(roleId);
         }
@@ -167,7 +166,7 @@ namespace ApiServer.BLL.BLL
         /// <param name="roleId"></param>
         /// <param name="checkedIds"></param>
         [Transaction]
-        public MsgModel SaveCheckedKeys(long roleId, List<long> checkedIds)
+        public MsgModel SaveCheckedKeys(int roleId, List<int> checkedIds)
         {
             // 保存之前先删除
             _baseSysRoleMenuService.DeleteRange(_baseSysRoleMenuService.GetModels(a => a.role_id == roleId).ToList());
@@ -190,7 +189,7 @@ namespace ApiServer.BLL.BLL
             List<sys_menu> sysMenus = _mySystemService.SelectMenuByUserName(username);
             if (sysMenus.Count > 0)
             {
-                long rootMenuId = sysMenus.First().id;
+                int rootMenuId = sysMenus.First().id;
 
                 List<SysMenuNode> sysMenuNodes = new List<SysMenuNode>();
                 foreach (sys_menu sys_menu in sysMenus)
@@ -198,7 +197,7 @@ namespace ApiServer.BLL.BLL
                     SysMenuNode sysMenuNode = sys_menu.BuildAdapter().AdaptToType<SysMenuNode>();
                     sysMenuNodes.Add(sysMenuNode);
                 }
-                msg.data = DataTreeUtil<SysMenuNode, long>.BuildTreeWithoutRoot(sysMenuNodes, rootMenuId);
+                msg.data = DataTreeUtil<SysMenuNode, int>.BuildTreeWithoutRoot(sysMenuNodes, rootMenuId);
                 return msg;
             }
             msg.data = new List<SysMenuNode>();
@@ -210,7 +209,7 @@ namespace ApiServer.BLL.BLL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="status"></param>
-        public MsgModel UpdateStatus(long id, bool status)
+        public MsgModel UpdateStatus(int id, bool status)
         {
             sys_menu sys_menu = _baseSysMenuService.GetModels(a => a.id == id).SingleOrDefault();
             sys_menu.id = id;

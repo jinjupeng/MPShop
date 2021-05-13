@@ -7,29 +7,29 @@ namespace ApiServer.BLL.IBLL
 {
     public interface IMySystemService
     {
-        List<sys_org> SelectOrgTree(long rootOrgId, string orgNameLike, bool? orgStatus);
+        List<sys_org> SelectOrgTree(int rootOrgId, string orgNameLike, bool? orgStatus);
 
-        List<sys_menu> SelectMenuTree(long rootMenuId, string menuNameLike, bool? menuStatus);
+        List<sys_menu> SelectMenuTree(int rootMenuId, string menuNameLike, bool? menuStatus);
 
-        List<sys_api> SelectApiTree(long rootApiId, string apiNameLike, bool apiStatus);
+        List<sys_api> SelectApiTree(int rootApiId, string apiNameLike, bool apiStatus);
 
-        int InsertRoleMenuIds(long roleId, List<long> checkedIds);
+        int InsertRoleMenuIds(int roleId, List<int> checkedIds);
 
-        int InsertRoleApiIds(long roleId, List<long> checkedIds);
+        int InsertRoleApiIds(int roleId, List<int> checkedIds);
 
         List<string> SelectApiExpandedKeys();
 
         List<string> SelectMenuExpandedKeys();
 
-        List<string> SelectApiCheckedKeys(long roleId);
+        List<string> SelectApiCheckedKeys(int roleId);
 
-        List<string> SelectMenuCheckedKeys(long roleId);
+        List<string> SelectMenuCheckedKeys(int roleId);
 
-        List<string> GetCheckedRoleIds(long userId);
+        List<string> GetCheckedRoleIds(int userId);
 
-        long InsertUserRoleIds(long userId, List<long> checkedIds);
+        int InsertUserRoleIds(int userId, List<int> checkedIds);
 
         List<sys_menu> SelectMenuByUserName(string userName);
-        MsgModel SelectUser(int pageIndex, int pageSize, long? orgId, string userName, string phone, string email, bool? enabled, DateTime? createStartTime, DateTime? createEndTime);
+        MsgModel SelectUser(int pageIndex, int pageSize, int? orgId, string userName, string phone, string email, bool? enabled, DateTime? createStartTime, DateTime? createEndTime);
     }
 }

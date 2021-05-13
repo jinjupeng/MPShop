@@ -11,9 +11,9 @@ namespace ApiServer.BLL.IBLL
 
         MsgModel UpdateRole(sys_role sys_role);
         MsgModel AddRole(sys_role sys_role);
-        MsgModel DeleteRole(long id);
-        MsgModel GetRolesAndChecked(long userId);
-        MsgModel SaveCheckedKeys(long userId, List<long> checkedIds);
-        MsgModel UpdateStatus(long id, bool status);
+        MsgModel DeleteRole(int id);
+        MsgModel GetRolesAndChecked(int userId);
+        MsgModel SaveCheckedKeys(int userId, List<int> checkedIds);
+        MsgModel UpdateStatus(int id, bool status);
     }
 }

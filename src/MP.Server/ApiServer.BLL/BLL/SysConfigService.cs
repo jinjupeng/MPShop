@@ -52,7 +52,6 @@ namespace ApiServer.BLL.BLL
 
         public MsgModel AddConfig(sys_config sys_Config)
         {
-            sys_Config.id = new Snowflake().GetId();
             var result = _baseSysConfigService.Insert(sys_Config);
             return result ? MsgModel.Success("新增配置成功！") : MsgModel.Fail("新增配置失败！");
         }

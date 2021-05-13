@@ -30,7 +30,7 @@ namespace ApiServer.Controllers
         {
             var sysUser = new sys_user
             {
-                id = 1297873308628307970
+                id = 12345
             };
             _baseService.InsertAsync(sysUser);
             _logger.LogError("全局异常过滤测试");

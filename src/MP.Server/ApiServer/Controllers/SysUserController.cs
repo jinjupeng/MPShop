@@ -47,7 +47,7 @@ namespace ApiServer.Controllers
         [Route("query")]
         public async Task<IActionResult> Query([FromForm] Dictionary<string, string> pairs)
         {
-            long? orgId = null;//long.TryParse(pairs["orgId"], out long tryOrgId) ? tryOrgId : default;
+            int? orgId = null;//long.TryParse(pairs["orgId"], out long tryOrgId) ? tryOrgId : default;
             string userName = pairs["username"];
             string phone = pairs["phone"];
             string email = pairs["email"];
@@ -93,7 +93,7 @@ namespace ApiServer.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("delete")]
-        public async Task<IActionResult> Delete([FromForm] long userId)
+        public async Task<IActionResult> Delete([FromForm] int userId)
         {
             return Ok(await Task.FromResult(_sysUserService.DeleteUser(userId)));
         }
@@ -105,7 +105,7 @@ namespace ApiServer.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("pwd/reset")]
-        public async Task<IActionResult> PwdReset([FromForm] long userId)
+        public async Task<IActionResult> PwdReset([FromForm] int userId)
         {
             return Ok(await Task.FromResult(_sysUserService.PwdReset(userId)));
         }
@@ -144,7 +144,7 @@ namespace ApiServer.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("enabled/change")]
-        public async Task<IActionResult> Update([FromForm] long userId, bool enabled)
+        public async Task<IActionResult> Update([FromForm] int userId, bool enabled)
         {
             return Ok(await Task.FromResult(_sysUserService.UpdateEnabled(userId, enabled)));
         }

@@ -2,12 +2,12 @@
 {
     public class SysMenu
     {
-        public long id { get; set; }
+        public int id { get; set; }
 
         /// <summary>
         /// 父菜单ID
         /// </summary>
-        public long menuPid { get; set; }
+        public int menuPid { get; set; }
 
         /// <summary>
         /// 当前菜单所有父菜单

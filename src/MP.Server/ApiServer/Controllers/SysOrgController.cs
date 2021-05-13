@@ -100,7 +100,7 @@ namespace ApiServer.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("status/change")]
-        public async Task<IActionResult> Update([FromForm] long orgId, bool status)
+        public async Task<IActionResult> Update([FromForm] int orgId, bool status)
         {
             return Ok(await Task.FromResult(_sysOrgService.UpdateStatus(orgId, status)));
 

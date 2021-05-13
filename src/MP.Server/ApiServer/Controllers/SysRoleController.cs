@@ -72,7 +72,7 @@ namespace ApiServer.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("delete")]
-        public async Task<IActionResult> Delete([FromForm] long roleId)
+        public async Task<IActionResult> Delete([FromForm] int roleId)
         {
             return Ok(await Task.FromResult(_sysRoleService.DeleteRole(roleId)));
 
@@ -85,7 +85,7 @@ namespace ApiServer.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("checkedroles")]
-        public async Task<IActionResult> CheckedRoles([FromForm] long userId)
+        public async Task<IActionResult> CheckedRoles([FromForm] int userId)
         {
             return Ok(await Task.FromResult(_sysRoleService.GetRolesAndChecked(userId)));
         }
@@ -110,7 +110,7 @@ namespace ApiServer.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("status/change")]
-        public async Task<IActionResult> Update([FromForm] long roleId, bool status)
+        public async Task<IActionResult> Update([FromForm] int roleId, bool status)
         {
             return Ok(await Task.FromResult(_sysRoleService.UpdateStatus(roleId, status)));
         }

@@ -88,7 +88,7 @@ namespace ApiServer.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("checkedtree")]
-        public async Task<IActionResult> CheckedTree([FromForm] long roleId)
+        public async Task<IActionResult> CheckedTree([FromForm] int roleId)
         {
             MsgModel msg = new MsgModel
             {
@@ -127,7 +127,7 @@ namespace ApiServer.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("status/change")]
-        public async Task<IActionResult> Update([FromForm] long apiId, bool status)
+        public async Task<IActionResult> Update([FromForm] int apiId, bool status)
         {
             return Ok(await Task.FromResult(_sysApiService.UpdateStatus(apiId, status)));
 

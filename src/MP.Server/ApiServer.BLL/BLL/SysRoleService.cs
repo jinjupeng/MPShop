@@ -83,13 +83,9 @@ namespace ApiServer.BLL.BLL
 
         public MsgModel AddRole(sys_role sys_role)
         {
-            CustomException customException = new CustomException();
-            sys_role.id = new Snowflake().GetId();
             sys_role.status = false;// 是否禁用:false
             if (_baseSysRoleService.GetModels(a => a.role_code == sys_role.role_code).Any())
             {
-                customException.Code = (int)HttpStatusCode.Status500InternalServerError;
-
                 return MsgModel.Fail(StatusCodes.Status500InternalServerError, "角色编码已存在，不能重复！");
             }
             if (!_baseSysRoleService.Insert(sys_role))
@@ -99,7 +95,7 @@ namespace ApiServer.BLL.BLL
             return MsgModel.Success("新增角色成功！");
         }
 
-        public MsgModel DeleteRole(long id)
+        public MsgModel DeleteRole(int id)
         {
             if (!_baseSysRoleService.DeleteRange(_baseSysRoleService.GetModels(a => a.id == id)))
             {
@@ -113,7 +109,7 @@ namespace ApiServer.BLL.BLL
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public MsgModel GetRolesAndChecked(long userId)
+        public MsgModel GetRolesAndChecked(int userId)
         {
             Dictionary<string, object> dict = new Dictionary<string, object>
             {
@@ -131,7 +127,7 @@ namespace ApiServer.BLL.BLL
         /// <param name="userId"></param>
         /// <param name="checkedIds"></param>
         [Transaction]
-        public MsgModel SaveCheckedKeys(long userId, List<long> checkedIds)
+        public MsgModel SaveCheckedKeys(int userId, List<int> checkedIds)
         {
             _sysUserRoleService.DeleteRange(_sysUserRoleService.GetModels(a => a.user_id == userId).ToList());
             _mySystemService.InsertUserRoleIds(userId, checkedIds);
@@ -143,7 +139,7 @@ namespace ApiServer.BLL.BLL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="status"></param>
-        public MsgModel UpdateStatus(long id, bool status)
+        public MsgModel UpdateStatus(int id, bool status)
         {
             sys_role sys_role = _baseSysRoleService.GetModels(a => a.id == id).SingleOrDefault();
             sys_role.status = status;

@@ -9,7 +9,7 @@ namespace ApiServer.Model.Entity
 {
     public partial class sys_config
     {
-        public long id { get; set; }
+        public int id { get; set; }
         public string param_name { get; set; }
         public string param_key { get; set; }
         public string param_value { get; set; }

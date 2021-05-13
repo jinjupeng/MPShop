@@ -16,13 +16,13 @@ namespace ApiServer.BLL.IBLL
 
         MsgModel DeleteApi(sys_api sys_Api);
 
-        List<string> GetCheckedKeys(long roleId);
+        List<string> GetCheckedKeys(int roleId);
 
         List<string> GetExpandedKeys();
 
-        MsgModel SaveCheckedKeys(long roleId, List<long> checkedIds);
+        MsgModel SaveCheckedKeys(int roleId, List<int> checkedIds);
 
-        MsgModel UpdateStatus(long id, bool status);
+        MsgModel UpdateStatus(int id, bool status);
 
     }
 }

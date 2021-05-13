@@ -247,7 +247,7 @@
             <param name="sysApi"></param>
             <returns></returns>
         </member>
-        <member name="M:ApiServer.Controllers.SysApiController.CheckedTree(System.Int64)">
+        <member name="M:ApiServer.Controllers.SysApiController.CheckedTree(System.Int32)">
             <summary>
             角色管理：API树展示（勾选项、展开项）
             </summary>
@@ -261,7 +261,7 @@
             <param name="roleCheckedIds"></param>
             <returns></returns>
         </member>
-        <member name="M:ApiServer.Controllers.SysApiController.Update(System.Int64,System.Boolean)">
+        <member name="M:ApiServer.Controllers.SysApiController.Update(System.Int32,System.Boolean)">
             <summary>
             接口管理：更新接口禁用状态
             </summary>
@@ -405,7 +405,7 @@
             <param name="sysMenu"></param>
             <returns></returns>
         </member>
-        <member name="M:ApiServer.Controllers.SysMenuController.CheckedTree(System.Int64)">
+        <member name="M:ApiServer.Controllers.SysMenuController.CheckedTree(System.Int32)">
             <summary>
             角色管理:菜单树展示（勾选项、展开项）
             </summary>
@@ -426,7 +426,7 @@
             <param name="userName"></param>
             <returns></returns>
         </member>
-        <member name="M:ApiServer.Controllers.SysMenuController.Update(System.Int64,System.Boolean)">
+        <member name="M:ApiServer.Controllers.SysMenuController.Update(System.Int32,System.Boolean)">
             <summary>
             菜单管理：更新菜单禁用状态
             </summary>
@@ -474,7 +474,7 @@
             <param name="sysOrg"></param>
             <returns></returns>
         </member>
-        <member name="M:ApiServer.Controllers.SysOrgController.Update(System.Int64,System.Boolean)">
+        <member name="M:ApiServer.Controllers.SysOrgController.Update(System.Int32,System.Boolean)">
             <summary>
             
             </summary>
@@ -514,14 +514,14 @@
             <param name="sysRole"></param>
             <returns></returns>
         </member>
-        <member name="M:ApiServer.Controllers.SysRoleController.Delete(System.Int64)">
+        <member name="M:ApiServer.Controllers.SysRoleController.Delete(System.Int32)">
             <summary>
             
             </summary>
             <param name="roleId"></param>
             <returns></returns>
         </member>
-        <member name="M:ApiServer.Controllers.SysRoleController.CheckedRoles(System.Int64)">
+        <member name="M:ApiServer.Controllers.SysRoleController.CheckedRoles(System.Int32)">
             <summary>
             用户管理：为用户分配角色，展示角色列表及勾选角色列表
             </summary>
@@ -535,7 +535,7 @@
             <param name="userRoleCheckedIds"></param>
             <returns></returns>
         </member>
-        <member name="M:ApiServer.Controllers.SysRoleController.Update(System.Int64,System.Boolean)">
+        <member name="M:ApiServer.Controllers.SysRoleController.Update(System.Int32,System.Boolean)">
             <summary>
             角色管理：更新角色禁用状态
             </summary>
@@ -582,14 +582,14 @@
             <param name="sysUser"></param>
             <returns></returns>
         </member>
-        <member name="M:ApiServer.Controllers.SysUserController.Delete(System.Int64)">
+        <member name="M:ApiServer.Controllers.SysUserController.Delete(System.Int32)">
             <summary>
             用户管理：删除
             </summary>
             <param name="userId"></param>
             <returns></returns>
         </member>
-        <member name="M:ApiServer.Controllers.SysUserController.PwdReset(System.Int64)">
+        <member name="M:ApiServer.Controllers.SysUserController.PwdReset(System.Int32)">
             <summary>
             用户管理：重置密码
             </summary>
@@ -612,7 +612,7 @@
             <param name="newPass"></param>
             <returns></returns>
         </member>
-        <member name="M:ApiServer.Controllers.SysUserController.Update(System.Int64,System.Boolean)">
+        <member name="M:ApiServer.Controllers.SysUserController.Update(System.Int32,System.Boolean)">
             <summary>
             用户管理：更新用户激活状态
             </summary>

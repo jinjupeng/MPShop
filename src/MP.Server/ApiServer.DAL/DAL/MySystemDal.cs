@@ -36,14 +36,13 @@ namespace ApiServer.DAL.DAL
 
         }
 
-        public int InsertRoleApiIds(long roleId, List<long> checkedIds)
+        public int InsertRoleApiIds(int roleId, List<int> checkedIds)
         {
             var sysRoleApis = new List<sys_role_api>();
             foreach(var item in checkedIds)
             {
                 var sysRoleApi = new sys_role_api
                 {
-                    id = new Snowflake().GetId(),
                     role_id = roleId,
                     api_id = item
                 };
@@ -61,14 +60,13 @@ namespace ApiServer.DAL.DAL
             //return _context.Database.ExecuteSqlRaw(sql);
         }
 
-        public int InsertRoleMenuIds(long roleId, List<long> checkedIds)
+        public int InsertRoleMenuIds(int roleId, List<int> checkedIds)
         {
             var sysRoleMenus = new List<sys_role_menu>();
             foreach (var item in checkedIds)
             {
                 var sysRoleMenu = new sys_role_menu
                 {
-                    id = new Snowflake().GetId(),
                     role_id = roleId,
                     menu_id = item
                 };
@@ -86,14 +84,13 @@ namespace ApiServer.DAL.DAL
             //return _context.Database.ExecuteSqlRaw(sql);
         }
 
-        public int InsertUserRoleIds(long userId, List<long> checkedIds)
+        public int InsertUserRoleIds(int userId, List<int> checkedIds)
         {
             var sysUserRoles = new List<sys_user_role>();
             foreach (var item in checkedIds)
             {
                 var sysUserRole = new sys_user_role
                 {
-                    id = new Snowflake().GetId(),
                     user_id = userId,
                     role_id = item
                 };
