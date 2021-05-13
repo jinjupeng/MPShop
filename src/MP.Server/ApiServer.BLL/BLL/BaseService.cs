@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 
 namespace ApiServer.BLL.BLL
 {
+    /// <summary>
+    /// 在Service层，对数据库的非查询操作都需要调用SaveChange()/SaveChangeAsync()方法
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class BaseService<T> : IBaseService<T> where T : class
     {
         private readonly IBaseDal<T> _baseDal;
@@ -26,25 +30,25 @@ namespace ApiServer.BLL.BLL
         public async Task<bool> AddRangeAsync(IEnumerable<T> t)
         {
             await _baseDal.AddRangeAsync(t);
-            return await _baseDal.SaveChangesAsync();
+            return await unitOfWork.SaveChangesAsync() > 0;
         }
 
         public bool DeleteRange(IEnumerable<T> t)
         {
             _baseDal.DeleteRange(t);
-            return _baseDal.SaveChanges();
+            return unitOfWork.SaveChanges() > 0;
         }
 
         public bool DeleteRange(Expression<Func<T, bool>> expression)
         {
             _baseDal.DeleteRange(expression);
-            return _baseDal.SaveChanges();
+            return unitOfWork.SaveChanges() > 0;
         }
 
         public bool UpdateRange(IEnumerable<T> t)
         {
             _baseDal.UpdateRange(t);
-            return _baseDal.SaveChanges();
+            return unitOfWork.SaveChanges() > 0;
         }
 
         public IQueryable<T> GetModels(Expression<Func<T, bool>> whereLambda)
@@ -66,13 +70,13 @@ namespace ApiServer.BLL.BLL
             return pageModel;
         }
 
-        public async Task<int> InsertAndSaveAsync(T entity)
+        public async Task<int> InsertAsync(T entity)
         {
             await _baseDal.InsertAsync(entity);
             return await unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<int> UpdateAndSaveAsync(T entity)
+        public async Task<int> UpdateAsync(T entity)
         {
             _baseDal.Update(entity);
             return await unitOfWork.SaveChangesAsync();
@@ -112,7 +116,7 @@ namespace ApiServer.BLL.BLL
         public async Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
         {
             var result = await _baseDal.AddAsync(entity);
-            await _baseDal.SaveChangesAsync();
+            await unitOfWork.SaveChangesAsync();
             return result;
         }
 
@@ -125,7 +129,7 @@ namespace ApiServer.BLL.BLL
         public async Task<T> UpdateAsync(T entity, CancellationToken cancellationToken = default)
         {
             var result = await _baseDal.UpdateAsync(entity);
-            await _baseDal.SaveChangesAsync();
+            await unitOfWork.SaveChangesAsync();
             return result;
         }
 
@@ -138,7 +142,7 @@ namespace ApiServer.BLL.BLL
         public async Task<bool> RemoveAsync(T entity, CancellationToken cancellationToken = default)
         {
             await _baseDal.RemoveAsync(entity);
-            return await _baseDal.SaveChangesAsync();
+            return await unitOfWork.SaveChangesAsync() > 0;
         }
 
         /// <summary>
@@ -151,7 +155,7 @@ namespace ApiServer.BLL.BLL
         {
             var delModels = await _baseDal.SelectAsync(express);
             _baseDal.DeleteRange(delModels);
-            return  _baseDal.SaveChanges();
+            return unitOfWork.SaveChanges() > 0;
         }
 
         /// <summary>
@@ -162,14 +166,14 @@ namespace ApiServer.BLL.BLL
         public T Add(T entity)
         {
             var result = _baseDal.Add(entity);
-            _baseDal.SaveChanges();
+            unitOfWork.SaveChanges();
             return result;
         }
 
         public bool Insert(T entity)
         {
             _baseDal.Add(entity);
-            return _baseDal.SaveChanges();
+            return unitOfWork.SaveChanges() > 0;
         }
 
         /// <summary>
@@ -180,7 +184,7 @@ namespace ApiServer.BLL.BLL
         public bool Update(T entity)
         {
             _baseDal.Update(entity);
-            return _baseDal.SaveChanges();
+            return unitOfWork.SaveChanges() > 0;
         }
 
         /// <summary>
@@ -191,7 +195,7 @@ namespace ApiServer.BLL.BLL
         public bool Remove(T entity)
         {
             _baseDal.Remove(entity);
-            return _baseDal.SaveChanges();
+            return unitOfWork.SaveChanges() > 0;
         }
     }
 }

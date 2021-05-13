@@ -47,7 +47,7 @@ namespace ApiServer.Model.Entity
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("server=127.0.0.1;port=3306;database=apiserver;user id=root;password=123456;allow user variables=True", x => x.ServerVersion("8.0.13-mysql"));
+                optionsBuilder.UseMySql("server=127.0.0.1;port=3306;database=mpshop;user id=root;password=123456;allow user variables=True", x => x.ServerVersion("8.0.13-mysql"));
             }
         }
 
@@ -668,9 +668,11 @@ namespace ApiServer.Model.Entity
 
             modelBuilder.Entity<sys_role_api>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.HasComment("角色接口权限关系表");
+
+                entity.Property(e => e.id)
+                    .HasColumnType("bigint(20)")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.api_id)
                     .HasColumnType("bigint(20)")
@@ -683,9 +685,11 @@ namespace ApiServer.Model.Entity
 
             modelBuilder.Entity<sys_role_menu>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.HasComment("角色菜单权限关系表");
+
+                entity.Property(e => e.id)
+                    .HasColumnType("bigint(20)")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.menu_id)
                     .HasColumnType("bigint(20)")
@@ -766,9 +770,11 @@ namespace ApiServer.Model.Entity
 
             modelBuilder.Entity<sys_user_role>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.HasComment("用户角色关系表");
+
+                entity.Property(e => e.id)
+                    .HasColumnType("bigint(20)")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.role_id)
                     .HasColumnType("bigint(20)")

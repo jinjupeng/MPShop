@@ -24,9 +24,9 @@ namespace ApiServer.BLL.IBLL
 
         PageModel<T> QueryByPage<TKey>(int pageIndex, int pageSize, Expression<Func<T, bool>> whereLambda, Expression<Func<T, TKey>> orderBy);
 
-        Task<int> InsertAndSaveAsync(T entity);
+        Task<int> InsertAsync(T entity);
 
-        Task<int> UpdateAndSaveAsync(T entity);
+        Task<int> UpdateAsync(T entity);
 
         Task<bool> IsExistAsync(Expression<Func<T, bool>> whereLambda);
 

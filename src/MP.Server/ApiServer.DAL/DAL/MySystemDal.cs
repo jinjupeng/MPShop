@@ -1,4 +1,5 @@
-﻿using ApiServer.DAL.IDAL;
+﻿using ApiServer.Common;
+using ApiServer.DAL.IDAL;
 using ApiServer.Model.Entity;
 using ApiServer.Model.Model.ViewModel;
 using Microsoft.EntityFrameworkCore;
@@ -37,34 +38,77 @@ namespace ApiServer.DAL.DAL
 
         public int InsertRoleApiIds(long roleId, List<long> checkedIds)
         {
-            foreach (var checkedId in checkedIds)
+            var sysRoleApis = new List<sys_role_api>();
+            foreach(var item in checkedIds)
             {
-                string sql = $"INSERT INTO sys_role_api (role_id, api_id) VALUES({roleId}, {checkedId})";
-                _context.Database.ExecuteSqlRaw(sql);
+                var sysRoleApi = new sys_role_api
+                {
+                    id = new Snowflake().GetId(),
+                    role_id = roleId,
+                    api_id = item
+                };
+                sysRoleApis.Add(sysRoleApi);
             }
+            _context.Set<sys_role_api>().AddRange(sysRoleApis);
+            
+            return checkedIds.Count;
 
-            return _context.SaveChanges();
+            //string sql = string.Empty;
+            //foreach (var checkedId in checkedIds)
+            //{
+            //    sql += $"INSERT INTO sys_role_api (role_id, api_id) VALUES({roleId}, {checkedId})";
+            //}
+            //return _context.Database.ExecuteSqlRaw(sql);
         }
 
         public int InsertRoleMenuIds(long roleId, List<long> checkedIds)
         {
-            foreach (var checkedId in checkedIds)
+            var sysRoleMenus = new List<sys_role_menu>();
+            foreach (var item in checkedIds)
             {
-                string sql = $"INSERT INTO sys_role_menu (role_id, menu_id) VALUES({roleId}, {checkedId})";
-                _context.Database.ExecuteSqlRaw(sql);
+                var sysRoleMenu = new sys_role_menu
+                {
+                    id = new Snowflake().GetId(),
+                    role_id = roleId,
+                    menu_id = item
+                };
+                sysRoleMenus.Add(sysRoleMenu);
             }
-            return _context.SaveChanges();
+            _context.Set<sys_role_menu>().AddRange(sysRoleMenus);
+
+            return checkedIds.Count;
+
+            //string sql = string.Empty;
+            //foreach (var checkedId in checkedIds)
+            //{
+            //    sql += $"INSERT INTO sys_role_menu (role_id, menu_id) VALUES({roleId}, {checkedId});";
+            //}
+            //return _context.Database.ExecuteSqlRaw(sql);
         }
 
         public int InsertUserRoleIds(long userId, List<long> checkedIds)
         {
-            string sql = string.Empty;
-            foreach (var checkedId in checkedIds)
+            var sysUserRoles = new List<sys_user_role>();
+            foreach (var item in checkedIds)
             {
-                sql += $"INSERT INTO sys_user_role (role_id, user_id) VALUES({checkedId}, {userId});";
-
+                var sysUserRole = new sys_user_role
+                {
+                    id = new Snowflake().GetId(),
+                    user_id = userId,
+                    role_id = item
+                };
+                sysUserRoles.Add(sysUserRole);
             }
-            return _context.Database.ExecuteSqlRaw(sql);
+            _context.Set<sys_user_role>().AddRange(sysUserRoles);
+
+            return checkedIds.Count;
+
+            //string sql = string.Empty;
+            //foreach (var checkedId in checkedIds)
+            //{
+            //    sql += $"INSERT INTO sys_user_role (role_id, user_id) VALUES({checkedId}, {userId});";
+            //}
+            //return _context.Database.ExecuteSqlRaw(sql);
         }
 
         public IQueryable<string> SelectApiCheckedKeys(long roleId)

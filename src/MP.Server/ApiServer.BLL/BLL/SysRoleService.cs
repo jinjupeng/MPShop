@@ -1,5 +1,6 @@
 ﻿using ApiServer.BLL.IBLL;
 using ApiServer.Common;
+using ApiServer.Common.Attributes;
 using ApiServer.Model.Entity;
 using ApiServer.Model.Enum;
 using ApiServer.Model.Model.MsgModel;
@@ -129,6 +130,7 @@ namespace ApiServer.BLL.BLL
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="checkedIds"></param>
+        [Transaction]
         public MsgModel SaveCheckedKeys(long userId, List<long> checkedIds)
         {
             _sysUserRoleService.DeleteRange(_sysUserRoleService.GetModels(a => a.user_id == userId).ToList());

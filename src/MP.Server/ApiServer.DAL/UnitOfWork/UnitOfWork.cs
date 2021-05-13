@@ -86,5 +86,10 @@ namespace ApiServer.DAL.UnitOfWork
         {
             return await myDbContext.SaveChangesAsync();
         }
+
+        public int SaveChanges()
+        {
+            return myDbContext.SaveChanges();
+        }
     }
 }

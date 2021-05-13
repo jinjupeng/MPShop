@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 
 namespace ApiServer.DAL.DAL
 {
+    /// <summary>
+    /// 在Dal层，对数据库的任何操作都不需要调用SaveChange()/SaveChangeAsync()方法
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class BaseDal<T> : IBaseDal<T> where T : class
     {
         /// <summary>

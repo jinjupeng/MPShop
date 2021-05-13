@@ -32,7 +32,7 @@ namespace ApiServer.Controllers
             {
                 id = 1297873308628307970
             };
-            _baseService.InsertAndSaveAsync(sysUser);
+            _baseService.InsertAsync(sysUser);
             _logger.LogError("全局异常过滤测试");
             // throw new System.Exception("自定义全局异常过滤抛出测试");
             return new List<string>();

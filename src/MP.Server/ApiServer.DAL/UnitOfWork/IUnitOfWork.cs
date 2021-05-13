@@ -36,5 +36,6 @@ namespace ApiServer.DAL.UnitOfWork
         void Rollback();
 
         Task<int> SaveChangesAsync();
+        int SaveChanges();
     }
 }
