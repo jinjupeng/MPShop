@@ -13,7 +13,6 @@ using ApiServer.Model.Entity;
 using ApiServer.Model.Enum;
 using ApiServer.Model.Model.Config;
 using ApiServer.Model.Model.MsgModel;
-using ApiServer.RabbitMQ;
 using AspNetCoreRateLimit;
 using Autofac;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -119,8 +118,6 @@ namespace ApiServer
             }
 
             services.AddHttpClient();
-
-            services.AddRabbitMQ(Configuration);
 
             #region 配置文件绑定
 
