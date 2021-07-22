@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer.Model", "ApiServe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer.Extensions", "ApiServer.Extensions\ApiServer.Extensions.csproj", "{918CEC32-1538-4CD2-958B-CD0469DEEB5D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiServer.Tasks", "ApiServer.Tasks\ApiServer.Tasks.csproj", "{6D16FA68-3CE0-49AC-BB70-2BB89238CF63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{918CEC32-1538-4CD2-958B-CD0469DEEB5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{918CEC32-1538-4CD2-958B-CD0469DEEB5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{918CEC32-1538-4CD2-958B-CD0469DEEB5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D16FA68-3CE0-49AC-BB70-2BB89238CF63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D16FA68-3CE0-49AC-BB70-2BB89238CF63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D16FA68-3CE0-49AC-BB70-2BB89238CF63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D16FA68-3CE0-49AC-BB70-2BB89238CF63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
